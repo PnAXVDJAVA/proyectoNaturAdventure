@@ -96,13 +96,6 @@ public class ActivityDao {
 			e.printStackTrace();
 			return null;
 		}
-		
-		
-		
-		
-		
-		
-		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Activity activity = null;
