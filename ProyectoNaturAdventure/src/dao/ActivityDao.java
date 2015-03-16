@@ -144,4 +144,155 @@ public class ActivityDao {
 		}
 		return activity;
 	}
+	public void addActivity(Activity activity) {
+
+		Connection connection = null;
+		try {
+			connection = ConnectionManager.getConnection();
+		}
+		catch (ClassNotFoundException e) {
+			Log.severe("El driver JDBC no se ha encontrado");
+			e.printStackTrace();
+			return;
+		}
+		catch (SQLException e) {
+			Log.severe("Error creando la connexión JDBC");
+			e.printStackTrace();
+			return;
+		}
+		
+		PreparedStatement stmt = null;
+		try {
+			stmt = connection.prepareStatement(
+				   "insert into Activity(codActivity, name, description, pricePerPerson,"
+				   + " duration, maxPartakers, minPartakers, level) "
+				   + " values(?, ?, ?, ?, ?, ?, ?, ?)");
+			stmt.setInt(1, activity.getCodActivity());
+			stmt.setString(2, activity.getName());
+			stmt.setString(3, activity.getDescription());
+			stmt.setInt(4, activity.getPricePerPerson());
+			stmt.setInt(5, activity.getDuration());
+			stmt.setInt(6, activity.getMaxPartakers());
+			stmt.setInt(7, activity.getMinPartakers());
+			stmt.setString(8, activity.getLevel().toString());
+			stmt.execute();
+		} catch (SQLException e) {
+			Log.severe("Error ejecutando preparedStatement");
+			e.printStackTrace();
+			return;
+		} finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					Log.warning("Error cerrando PreparedStatement");
+					e.printStackTrace();
+				}
+			} try {
+				connection.close();
+			} catch (SQLException e) {
+				Log.warning("Error cerrando la conexion JDBC");
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void updateActivity(Activity activity) {
+
+		Connection connection = null;
+		try {
+			connection = ConnectionManager.getConnection();
+		}
+		catch (ClassNotFoundException e) {
+			Log.severe("El driver JDBC no se ha encontrado");
+			e.printStackTrace();
+			return;
+		}
+		catch (SQLException e) {
+			Log.severe("Error creando la connexión JDBC");
+			e.printStackTrace();
+			return;
+		}
+		
+		PreparedStatement stmt = null;
+		try {
+			stmt = connection.prepareStatement(
+				   "update Activity set name = ?, description = ?, pricePerPerson = ?,"
+					+ " duration = ?, maxPartakers = ?, minPartakers = ?, level = ?"
+					+ " where codActivity = ?");
+			stmt.setString(1, activity.getName());
+			stmt.setString(2, activity.getDescription());
+			stmt.setInt(3, activity.getPricePerPerson());
+			stmt.setInt(4, activity.getDuration());
+			stmt.setInt(5, activity.getMaxPartakers());
+			stmt.setInt(6, activity.getMinPartakers());
+			stmt.setString(7, activity.getLevel().toString());
+			stmt.setInt(8, activity.getCodActivity());
+			stmt.execute();
+			
+		} catch (SQLException e) {
+			Log.severe("Error ejecutando preparedStatement");
+			e.printStackTrace();
+			return;
+		} finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					Log.warning("Error cerrando PreparedStatement");
+					e.printStackTrace();
+				}
+			} try {
+				connection.close();
+			} catch (SQLException e) {
+				Log.warning("Error cerrando la conexion JDBC");
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void deleteActivity(Activity activity) {
+
+		Connection connection = null;
+		try {
+			connection = ConnectionManager.getConnection();
+		}
+		catch (ClassNotFoundException e) {
+			Log.severe("El driver JDBC no se ha encontrado");
+			e.printStackTrace();
+			return;
+		}
+		catch (SQLException e) {
+			Log.severe("Error creando la connexión JDBC");
+			e.printStackTrace();
+			return;
+		}
+		
+		PreparedStatement stmt = null;
+		try {
+			String sentenciaBorrar = "delete from Activity where codActivity = ?";
+			stmt = connection.prepareStatement(sentenciaBorrar);
+			stmt.setInt(1, activity.getCodActivity());
+			stmt.execute();
+		}  catch (SQLException e) {
+			Log.severe("Error ejecutando preparedStatement");
+			e.printStackTrace();
+			return;
+		} finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					Log.warning("Error cerrando PreparedStatement");
+					e.printStackTrace();
+				}
+			} try {
+				connection.close();
+			} catch (SQLException e) {
+				Log.warning("Error cerrando la conexion JDBC");
+				e.printStackTrace();
+			}
+		}
+	}
 }
+

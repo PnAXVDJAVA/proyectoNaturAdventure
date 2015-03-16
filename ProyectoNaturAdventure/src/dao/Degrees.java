@@ -2,14 +2,24 @@ package dao;
 
 public class Degrees {
 	
+	private String name;
 	private String description;
 	private int degreeCode;
 	
-	public Degrees(String description, int degreeCode) {
+	public Degrees(String name, String description, int degreeCode) {
+		this.name = name;
 		this.description = description;
 		this.degreeCode = degreeCode;
 	}
-
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
