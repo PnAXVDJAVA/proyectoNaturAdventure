@@ -11,6 +11,15 @@ public class Booking {
 	private StartHour starHour;
 	private String status;
 	
+	public Booking() {
+		this.codBooking = -1;
+		this.proposalPerformingDate = null;
+		this.numPartakers = -1;
+		this.bookingDate = null;
+		this.customerNif = null;
+		this.starHour = null;
+	}
+	
 	public Booking(Date proposalPerformingDate, int numPartakers,
 			Date bookingDate, String customerNif, StartHour starHour) {
 		this.proposalPerformingDate = proposalPerformingDate;
