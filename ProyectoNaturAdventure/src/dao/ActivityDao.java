@@ -98,11 +98,6 @@ public class ActivityDao {
 		}
 		
 		
-		
-		
-		
-		
-		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Activity activity = null;
