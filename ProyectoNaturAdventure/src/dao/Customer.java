@@ -7,6 +7,13 @@ public class Customer {
 	private String email;
 	private int telephone;
 	
+	public Customer() {
+		this.NIF = null;
+		this.name = null;
+		this.email = null;
+		this.telephone = -1;
+	}
+	
 	public Customer(String NIF, String name, String email, int telephone) {
 		
 		this.NIF = NIF;
