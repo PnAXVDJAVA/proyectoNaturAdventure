@@ -92,10 +92,16 @@ public class ActivityDao {
 			return null;
 		}
 		catch (SQLException e) {
-			Log.severe("Error creando la connexión JDBC");
+			Log.severe("Error creando la connexion JDBC");
 			e.printStackTrace();
 			return null;
 		}
+		
+		
+		
+		
+		
+		
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
