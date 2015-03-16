@@ -11,5 +11,9 @@ public class Prueba2 {
 		System.out.println( "Hooolaaaaa" );
 		
 	}
+	
+	public void hola(String hola) {
+		
+	}
 
 }
