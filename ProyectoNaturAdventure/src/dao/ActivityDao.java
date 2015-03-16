@@ -27,7 +27,7 @@ public class ActivityDao {
 			return null;
 		}
 		catch (SQLException e) {
-			Log.severe("Error creando la connexión JDBC");
+			Log.severe("Error creando la conexion JDBC");
 			e.printStackTrace();
 			return null;
 		}
@@ -43,7 +43,7 @@ public class ActivityDao {
 				activity.setCodActivity(rs.getInt("codActivity"));
 				activity.setName(rs.getString("name"));
 				activity.setDescription(rs.getString("description"));
-				activity.setPricePerPerson(rs.getInt("duration"));
+				activity.setPricePerPerson(rs.getInt("pricePerPerson"));
 				activity.setDuration(rs.getInt("duration"));
 				activity.setMaxPartakers(rs.getInt("maxPartakers"));
 				activity.setMinPartakers(rs.getInt("minPartakers"));
@@ -92,7 +92,7 @@ public class ActivityDao {
 			return null;
 		}
 		catch (SQLException e) {
-			Log.severe("Error creando la connexión JDBC");
+			Log.severe("Error creando la conexion JDBC");
 			e.printStackTrace();
 			return null;
 		}
@@ -110,7 +110,7 @@ public class ActivityDao {
 			activity.setCodActivity(rs.getInt("codActivity"));
 			activity.setName(rs.getString("name"));
 			activity.setDescription(rs.getString("description"));
-			activity.setPricePerPerson(rs.getInt("duration"));
+			activity.setPricePerPerson(rs.getInt("pricePerPerson"));
 			activity.setDuration(rs.getInt("duration"));
 			activity.setMaxPartakers(rs.getInt("maxPartakers"));
 			activity.setMinPartakers(rs.getInt("minPartakers"));
@@ -144,6 +144,8 @@ public class ActivityDao {
 		}
 		return activity;
 	}
+	
+	
 	public void addActivity(Activity activity) {
 
 		Connection connection = null;
