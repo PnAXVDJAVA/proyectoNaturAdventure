@@ -6,7 +6,9 @@ import java.util.List;
 public class Tablas {
 
 	private static String getTablaActivity() {
-		String createTable = "";
+		String createTable = "CREATE TABLE....";
+		
+		
 		
 		return createTable;
 	}
