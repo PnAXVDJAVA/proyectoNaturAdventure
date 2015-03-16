@@ -2,8 +2,11 @@ package dao;
 
 public enum Level {
 
-	EASY,
-	MEDIUM,
-	HARD
-	
+	easy,
+	medium,
+	hard;
+
+	public static Level getOpcion(String level) {
+		return valueOf(level);
+	}
 }
