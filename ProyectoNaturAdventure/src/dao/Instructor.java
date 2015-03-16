@@ -2,6 +2,9 @@ package dao;
 
 import java.util.List;
 
+import common.Address;
+import common.Date;
+
 public class Instructor {
 
 	private String name;
