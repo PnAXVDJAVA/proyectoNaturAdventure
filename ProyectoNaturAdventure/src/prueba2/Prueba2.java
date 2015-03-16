@@ -18,7 +18,11 @@ public class Prueba2 {
 	
 	public String metodoDavid( String cadena ) {
 		cadena += "hola";
-		return cadena;
+		
+		int david = 1000;
+		david *= 100;
+		
+		return cadena +  david;
 	}
 
 }
