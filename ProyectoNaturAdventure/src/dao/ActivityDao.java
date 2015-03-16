@@ -31,7 +31,7 @@ public class ActivityDao {
 			e.printStackTrace();
 			return null;
 		}
-		HashSet<Activity> activities = new HashSet<Activity>();
+		Set<Activity> activities = new HashSet<Activity>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
