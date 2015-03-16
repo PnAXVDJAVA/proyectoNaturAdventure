@@ -209,7 +209,7 @@ public class ActivityDao {
 			return;
 		}
 		catch (SQLException e) {
-			Log.severe("Error creando la connexión JDBC");
+			Log.severe("Error creando la conexion JDBC");
 			e.printStackTrace();
 			return;
 		}
