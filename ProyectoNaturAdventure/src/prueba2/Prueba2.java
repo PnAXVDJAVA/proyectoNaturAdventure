@@ -15,5 +15,10 @@ public class Prueba2 {
 	public void hola(String hola) {
 		
 	}
+	
+	public String metodoDavid( String cadena ) {
+		cadena += "hola";
+		return cadena;
+	}
 
 }
