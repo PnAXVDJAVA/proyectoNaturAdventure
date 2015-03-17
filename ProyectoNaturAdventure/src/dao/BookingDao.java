@@ -67,7 +67,7 @@ public class BookingDao {
 		booking.setNumPartakers(rs.getInt("numPartakers"));
 		booking.setBookingDate(rs.getDate("bookingDate"));
 		booking.setCustomerNif(rs.getString("customerNif"));
-		//booking.setStarHour(rs.get("startHour"));
+		booking.setStartHour(StartHour.getOpcion(rs.getString("startHour")));
 		booking.setStatus(rs.getString("status"));
 		booking.setCodActivity(rs.getInt("codActivity"));
 		return booking;
@@ -87,7 +87,7 @@ public class BookingDao {
 			stmt.setInt(3, booking.getNumPartakers());
 			stmt.setDate(4, booking.getBookingDate());
 			stmt.setString(5, booking.getCustomerNif());
-			//stmt.setENUM(6, booking.getStartHour());
+			stmt.setString(6, booking.getStartHour().toString());
 			stmt.setString(7, booking.getStatus());
 			stmt.setInt(8, booking.getCodActivity());
 			stmt.execute();
@@ -113,7 +113,7 @@ public class BookingDao {
 			stmt.setInt(2, booking.getNumPartakers());
 			stmt.setDate(3, booking.getBookingDate());
 			stmt.setString(4, booking.getCustomerNif());
-			//stmt.setENUM(5, booking.getStartHour());
+			stmt.setString(5, booking.getStartHour().toString());
 			stmt.setString(6, booking.getStatus());
 			stmt.setInt(7, booking.getCodActivity());
 			stmt.setInt(8, booking.getCodBooking());
