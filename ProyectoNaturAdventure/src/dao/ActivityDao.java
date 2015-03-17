@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import common.ConnectionDatabase;
+
 import conexion.ConnectionManager;
 
 
@@ -15,22 +17,23 @@ public class ActivityDao {
 	//creamos el log para poder registrar todos los errores inesperados
 	private final static Logger Log = Logger.getLogger(ActivityDao.class.getName()); 
 	
+	private Activity storeActivities(ResultSet rs) throws SQLException {
+		Activity activity = new Activity();
+		activity.setCodActivity(rs.getInt("codActivity"));
+		activity.setName(rs.getString("name"));
+		activity.setDescription(rs.getString("description"));
+		activity.setPricePerPerson(rs.getInt("pricePerPerson"));
+		activity.setDuration(rs.getInt("duration"));
+		activity.setMaxPartakers(rs.getInt("maxPartakers"));
+		activity.setMinPartakers(rs.getInt("minPartakers"));
+		activity.setLevel(Level.getOpcion(rs.getString("level")));
+		return activity;
+	}
 	//Buscamos todas las actividades en la base de datos
 	public Set<Activity> getActivities() {
-		Connection connection = null;
-		try {
-			connection = ConnectionManager.getConnection();
-		}
-		catch (ClassNotFoundException e) {
-			Log.severe("El driver JDBC no se ha encontrado");
-			e.printStackTrace();
-			return null;
-		}
-		catch (SQLException e) {
-			Log.severe("Error creando la conexion JDBC");
-			e.printStackTrace();
-			return null;
-		}
+		ConnectionDatabase c = new ConnectionDatabase(Log);
+		Connection connection = c.getConnection();
+		
 		Set<Activity> activities = new HashSet<Activity>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -39,15 +42,7 @@ public class ActivityDao {
 					+ " duration, maxPartakers, minPartakers, level from Activity");
 			rs = stmt.executeQuery();
 			while(rs.next()) {
-				Activity activity = new Activity();
-				activity.setCodActivity(rs.getInt("codActivity"));
-				activity.setName(rs.getString("name"));
-				activity.setDescription(rs.getString("description"));
-				activity.setPricePerPerson(rs.getInt("pricePerPerson"));
-				activity.setDuration(rs.getInt("duration"));
-				activity.setMaxPartakers(rs.getInt("maxPartakers"));
-				activity.setMinPartakers(rs.getInt("minPartakers"));
-				activity.setLevel(Level.getOpcion(rs.getString("level")));
+				Activity activity = storeActivities(rs);
 				activities.add(activity);
 			}
 		} catch (SQLException e) {
@@ -55,94 +50,33 @@ public class ActivityDao {
 			e.printStackTrace();
 			return null;
 		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					Log.warning("Error cerrando ResultSet");
-					e.printStackTrace();
-				}
-			}
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					Log.warning("Error cerrando PreparedStatement");
-					e.printStackTrace();
-				}
-			} try {
-				connection.close();
-			} catch (SQLException e) {
-				Log.warning("Error cerrando la conexion JDBC");
-				e.printStackTrace();
-			}
+			c.closeConnections(stmt, rs);
 		}
 		return activities;
 	}
 	//Devuelve una actividad indicando el codActivity
 	public Activity getActivity(int codActivity) {
 		
-		Connection connection = null;
-		try {
-			connection = ConnectionManager.getConnection();
-		}
-		catch (ClassNotFoundException e) {
-			Log.severe("El driver JDBC no se ha encontrado");
-			e.printStackTrace();
-			return null;
-		}
-		catch (SQLException e) {
-			Log.severe("Error creando la connexion JDBC");
-			e.printStackTrace();
-			return null;
-		}
-		
+		ConnectionDatabase c = new ConnectionDatabase(Log);
+		Connection connection = c.getConnection();
 		
 		PreparedStatement stmt = null;
-		
 		ResultSet rs = null;
 		Activity activity = null;
+		
 		try {
 			String sentenciaBuscaActivity = "select * from Activity " 
 											+ "where codActivity = ?";
 			stmt = connection.prepareStatement(sentenciaBuscaActivity);
 			stmt.setInt(1, codActivity);
 			rs = stmt.executeQuery();
-			activity = new Activity();
-			activity.setCodActivity(rs.getInt("codActivity"));
-			activity.setName(rs.getString("name"));
-			activity.setDescription(rs.getString("description"));
-			activity.setPricePerPerson(rs.getInt("pricePerPerson"));
-			activity.setDuration(rs.getInt("duration"));
-			activity.setMaxPartakers(rs.getInt("maxPartakers"));
-			activity.setMinPartakers(rs.getInt("minPartakers"));
-			activity.setLevel(Level.getOpcion(rs.getString("level")));
+			activity = storeActivities(rs);
 		} catch (SQLException e) {
 			Log.severe("Error ejecutando preparedStatement");
 			e.printStackTrace();
 			return null;
 		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					Log.warning("Error cerrando ResultSet");
-					e.printStackTrace();
-				}
-			}
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					Log.warning("Error cerrando PreparedStatement");
-					e.printStackTrace();
-				}
-			} try {
-				connection.close();
-			} catch (SQLException e) {
-				Log.warning("Error cerrando la conexion JDBC");
-				e.printStackTrace();
-			}
+			c.closeConnections(stmt, rs);
 		}
 		return activity;
 	}
@@ -150,22 +84,10 @@ public class ActivityDao {
 	
 	public void addActivity(Activity activity) {
 
-		Connection connection = null;
-		try {
-			connection = ConnectionManager.getConnection();
-		}
-		catch (ClassNotFoundException e) {
-			Log.severe("El driver JDBC no se ha encontrado");
-			e.printStackTrace();
-			return;
-		}
-		catch (SQLException e) {
-			Log.severe("Error creando la connexión JDBC");
-			e.printStackTrace();
-			return;
-		}
-		
+		ConnectionDatabase c = new ConnectionDatabase(Log);
+		Connection connection = c.getConnection();
 		PreparedStatement stmt = null;
+		
 		try {
 			stmt = connection.prepareStatement(
 				   "insert into Activity(codActivity, name, description, pricePerPerson,"
@@ -185,40 +107,16 @@ public class ActivityDao {
 			e.printStackTrace();
 			return;
 		} finally {
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					Log.warning("Error cerrando PreparedStatement");
-					e.printStackTrace();
-				}
-			} try {
-				connection.close();
-			} catch (SQLException e) {
-				Log.warning("Error cerrando la conexion JDBC");
-				e.printStackTrace();
-			}
+			c.closeConnections(stmt);
 		}
 	}
 	
 	public void updateActivity(Activity activity) {
 
-		Connection connection = null;
-		try {
-			connection = ConnectionManager.getConnection();
-		}
-		catch (ClassNotFoundException e) {
-			Log.severe("El driver JDBC no se ha encontrado");
-			e.printStackTrace();
-			return;
-		}
-		catch (SQLException e) {
-			Log.severe("Error creando la conexion JDBC");
-			e.printStackTrace();
-			return;
-		}
-		
+		ConnectionDatabase c = new ConnectionDatabase(Log);
+		Connection connection = c.getConnection();
 		PreparedStatement stmt = null;
+		
 		try {
 			stmt = connection.prepareStatement(
 				   "update Activity set name = ?, description = ?, pricePerPerson = ?,"
@@ -239,40 +137,16 @@ public class ActivityDao {
 			e.printStackTrace();
 			return;
 		} finally {
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					Log.warning("Error cerrando PreparedStatement");
-					e.printStackTrace();
-				}
-			} try {
-				connection.close();
-			} catch (SQLException e) {
-				Log.warning("Error cerrando la conexion JDBC");
-				e.printStackTrace();
-			}
+			c.closeConnections(stmt);
 		}
 	}
 	
 	public void deleteActivity(Activity activity) {
 
-		Connection connection = null;
-		try {
-			connection = ConnectionManager.getConnection();
-		}
-		catch (ClassNotFoundException e) {
-			Log.severe("El driver JDBC no se ha encontrado");
-			e.printStackTrace();
-			return;
-		}
-		catch (SQLException e) {
-			Log.severe("Error creando la connexión JDBC");
-			e.printStackTrace();
-			return;
-		}
-		
+		ConnectionDatabase c = new ConnectionDatabase(Log);
+		Connection connection = c.getConnection();
 		PreparedStatement stmt = null;
+		
 		try {
 			String sentenciaBorrar = "delete from Activity where codActivity = ?";
 			stmt = connection.prepareStatement(sentenciaBorrar);
@@ -283,19 +157,7 @@ public class ActivityDao {
 			e.printStackTrace();
 			return;
 		} finally {
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					Log.warning("Error cerrando PreparedStatement");
-					e.printStackTrace();
-				}
-			} try {
-				connection.close();
-			} catch (SQLException e) {
-				Log.warning("Error cerrando la conexion JDBC");
-				e.printStackTrace();
-			}
+			c.closeConnections(stmt);
 		}
 	}
 }
