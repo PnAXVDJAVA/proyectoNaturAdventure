@@ -83,8 +83,6 @@ public class InstructorDao {
 		return instructor;
 	}
 	
-	
-	
 	public void addInstructor(Instructor instructor) {
 		ConnectionDatabase c = new ConnectionDatabase(Log);
 		Connection connection = c.getConnection();
