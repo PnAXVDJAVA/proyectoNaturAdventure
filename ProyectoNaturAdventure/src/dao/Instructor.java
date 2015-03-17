@@ -5,11 +5,14 @@ import java.util.List;
 import common.MyAddress;
 
 public class Instructor {
-	private String name;
 	private String NIF;
+	private String name;
+	private String firstSurname;
+	private String secondSurname;
 	private MyAddress address;
 	private int telephone;
 	private Date date;
+	private String email;
 	private String bankAccount;
 	private List<Degrees> degrees;
 	
@@ -34,6 +37,24 @@ public class Instructor {
 		this.degrees = degrees;
 	}
 	
+	public String getFirstSurname() {
+		return firstSurname;
+	}
+	public void setFirstSurname(String firstSurname) {
+		this.firstSurname = firstSurname;
+	}
+	public String getSecondSurname() {
+		return secondSurname;
+	}
+	public void setSecondSurname(String secondSurname) {
+		this.secondSurname = secondSurname;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getName() {
 		return name;
 	}
