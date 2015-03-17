@@ -77,4 +77,8 @@ public class Customer {
 	public void setTelephone(int telephone) {
 		this.telephone = telephone;
 	}
+	public String toString() {
+		return "Nif: " + nif + "\tName Surname Lastname: " + name + " " + firstSurname + " " + secondSurname 
+				+ "\nEmail: " + email + "\tTelephone: " + telephone;
+	}
 }
