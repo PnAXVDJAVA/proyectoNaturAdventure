@@ -14,7 +14,7 @@ public class Instructor {
 	private Date date;
 	private String email;
 	private String bankAccount;
-	private List<Degrees> degrees;
+	private List<Degree> degrees;
 	
 	public Instructor() {
 		this.name = null;
@@ -27,7 +27,7 @@ public class Instructor {
 	}
 	
 	public Instructor(String name, String nIF, MyAddress address,
-			int telephone, Date date, String bankAccount, List<Degrees> degrees) {
+			int telephone, Date date, String bankAccount, List<Degree> degrees) {
 		this.name = name;
 		this.NIF = nIF;
 		this.address = address;
@@ -91,10 +91,10 @@ public class Instructor {
 	public void setBankAccount(String bankAccount) {
 		this.bankAccount = bankAccount;
 	}
-	public List<Degrees> getDegrees() {
+	public List<Degree> getDegrees() {
 		return degrees;
 	}
-	public void setDegrees(List<Degrees> degrees) {
+	public void setDegrees(List<Degree> degrees) {
 		this.degrees = degrees;
 	}
 	

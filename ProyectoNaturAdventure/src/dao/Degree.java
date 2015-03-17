@@ -1,12 +1,12 @@
 package dao;
 
-public class Degrees {
+public class Degree {
 	
 	private String name;
 	private String description;
 	private int degreeCode;
 	
-	public Degrees(String name, String description, int degreeCode) {
+	public Degree(String name, String description, int degreeCode) {
 		this.name = name;
 		this.description = description;
 		this.degreeCode = degreeCode;
