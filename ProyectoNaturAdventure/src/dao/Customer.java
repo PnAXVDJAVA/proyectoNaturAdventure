@@ -17,25 +17,13 @@ public class Customer {
 		this.email = null;
 		this.telephone = -1;
 	}
-	
-	public Customer(String nIF, String name, String firstSurname,
-			String secondSurname, String email, int telephone) {
-		super();
-		nif = nIF;
-		this.name = name;
-		this.firstSurname = firstSurname;
-		this.secondSurname = secondSurname;
-		this.email = email;
-		this.telephone = telephone;
-	}
-	
-	
+
 	public String getNIF() {
 		return nif;
 	}
 
-	public void setNIF(String nIF) {
-		nif = nIF;
+	public void setNIF(String nif) {
+		this.nif = nif;
 	}
 
 	public String getName() {
