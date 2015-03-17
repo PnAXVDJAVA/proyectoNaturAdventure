@@ -27,11 +27,13 @@ public class CreacionTablas {
     			i++;
     		}
 
- 		}
-		catch (SQLException e) {
+ 		} catch (SQLException e) {
 			System.out.println("No se ha podido crear la tabla " + i );
 			e.printStackTrace();
 			return;
+		} finally {
+			if (conn != null)
+				conn.close();
 		}
 	}
 
