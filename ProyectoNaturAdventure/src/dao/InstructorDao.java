@@ -71,10 +71,10 @@ public class InstructorDao {
 		instructor.setFirstSurname( rs.getString( "firstSurname" ) );
 		instructor.setSecondSurname( rs.getString( "secondSurname" ) );
 		String nif = rs.getString( "nif" );
-		instructor.setNIF( nif );
+		instructor.setNif( nif );
 		instructor.setAddress( rs.getString( "address" ) );
 		instructor.setTelephone( rs.getInt( "telephone" ) );
-		instructor.setDate( rs.getDate(  "date" ) );
+		instructor.setDateOfBirth( rs.getDate(  "date" ) );
 		instructor.setBankAccount( rs.getString( "bankAccount" ) );
 		instructor.setDegrees( getInstructorDegrees( nif ) );
 		
@@ -169,7 +169,7 @@ public class InstructorDao {
 		PreparedStatement stmt = null;
 		try {
 			stmt = connection.prepareStatement("DELETE FROM Instructor WHERE nif = ?;");
-			stmt.setString(1, instructor.getNIF());
+			stmt.setString(1, instructor.getNif());
 			stmt.execute();
 		}  catch (SQLException e) {
 			Log.severe("Error ejecutando preparedStatement");
