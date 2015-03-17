@@ -12,6 +12,7 @@ import common.ConnectionDatabase;
 
 
 public class ActivityDao {
+	
 	//creamos el log para poder registrar todos los errores inesperados
 	private final static Logger Log = Logger.getLogger(ActivityDao.class.getName()); 
 	
