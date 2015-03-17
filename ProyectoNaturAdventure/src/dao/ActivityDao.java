@@ -10,8 +10,6 @@ import java.util.logging.Logger;
 
 import common.ConnectionDatabase;
 
-import conexion.ConnectionManager;
-
 
 public class ActivityDao {
 	//creamos el log para poder registrar todos los errores inesperados
@@ -22,7 +20,7 @@ public class ActivityDao {
 		activity.setCodActivity(rs.getInt("codActivity"));
 		activity.setName(rs.getString("name"));
 		activity.setDescription(rs.getString("description"));
-		activity.setPricePerPerson(rs.getInt("pricePerPerson"));
+		activity.setPricePerPerson(rs.getDouble("pricePerPerson"));
 		activity.setDuration(rs.getInt("duration"));
 		activity.setMaxPartakers(rs.getInt("maxPartakers"));
 		activity.setMinPartakers(rs.getInt("minPartakers"));
@@ -96,7 +94,7 @@ public class ActivityDao {
 			stmt.setInt(1, activity.getCodActivity());
 			stmt.setString(2, activity.getName());
 			stmt.setString(3, activity.getDescription());
-			stmt.setInt(4, activity.getPricePerPerson());
+			stmt.setDouble(4, activity.getPricePerPerson());
 			stmt.setInt(5, activity.getDuration());
 			stmt.setInt(6, activity.getMaxPartakers());
 			stmt.setInt(7, activity.getMinPartakers());
@@ -124,7 +122,7 @@ public class ActivityDao {
 					+ " where codActivity = ?");
 			stmt.setString(1, activity.getName());
 			stmt.setString(2, activity.getDescription());
-			stmt.setInt(3, activity.getPricePerPerson());
+			stmt.setDouble(3, activity.getPricePerPerson());
 			stmt.setInt(4, activity.getDuration());
 			stmt.setInt(5, activity.getMaxPartakers());
 			stmt.setInt(6, activity.getMinPartakers());

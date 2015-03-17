@@ -5,7 +5,7 @@ public class Activity {
 	private int codActivity;
 	private String name;
 	private String description;
-	private int pricePerPerson;
+	private double pricePerPerson;
 	private int duration;
 	private int maxPartakers;
 	private int minPartakers;
@@ -29,10 +29,10 @@ public class Activity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getPricePerPerson() {
+	public double getPricePerPerson() {
 		return pricePerPerson;
 	}
-	public void setPricePerPerson(int pricePerPerson) {
+	public void setPricePerPerson(double pricePerPerson) {
 		this.pricePerPerson = pricePerPerson;
 	}
 	public int getDuration() {

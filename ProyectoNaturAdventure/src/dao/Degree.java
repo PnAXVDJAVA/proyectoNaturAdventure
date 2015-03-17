@@ -5,6 +5,7 @@ public class Degree {
 	private String name;
 	private String description;
 	private int degreeCode;
+	private String instructorNif;
 	
 	public Degree() {
 		this.name = null;
@@ -29,6 +30,10 @@ public class Degree {
 	public String getDescription() {
 		return description;
 	}
+	
+	public String getInstructorNif() {
+		return this.instructorNif;
+	}
 
 	public void setDescription(String description) {
 		this.description = description;
@@ -40,6 +45,10 @@ public class Degree {
 
 	public void setDegreeCode(int degreeCode) {
 		this.degreeCode = degreeCode;
+	}
+	
+	public void setInstructorNif( String instructorNif ) {
+		this.instructorNif = instructorNif;
 	}
 	
 	@Override

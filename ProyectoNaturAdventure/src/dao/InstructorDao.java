@@ -100,6 +100,7 @@ public class InstructorDao {
 				degree.setDegreeCode( rs.getInt( "codDegree" ) );
 				degree.setName( rs.getString( "name" ) );
 				degree.setDescription( rs.getString( "description" ) );
+				degree.setInstructorNif( rs.getString( "instructorNif" ) );
 				degreeList.add( degree );
 			}
 			
