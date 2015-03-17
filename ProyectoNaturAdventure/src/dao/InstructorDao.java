@@ -1,10 +1,13 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -38,7 +41,7 @@ public class InstructorDao {
 	}
 	
 	//Devuelve un monitor indicando el nif
-	public Instructor getInstructor(int nif) {
+	public Instructor getInstructor(String nif) {
 		ConnectionDatabase c = new ConnectionDatabase(Log);
 		Connection connection = c.getConnection();
 		PreparedStatement stmt = null;
@@ -47,7 +50,7 @@ public class InstructorDao {
 		try {
 			stmt = connection.prepareStatement("SELECT * FROM Instructor " 
 												+ "WHERE nif = ?;");
-			stmt.setInt(1, nif);
+			stmt.setString(1, nif);
 			rs = stmt.executeQuery();
 			instructor = storeInstructor(rs);
 		} catch (SQLException e) {
@@ -63,16 +66,50 @@ public class InstructorDao {
 	private Instructor storeInstructor(ResultSet rs) throws SQLException {
 		Instructor instructor = new Instructor();
 		
-		/*
-		instructor.setNIF(rs.getString("nif"));
-		instructor.setName(rs.getString("name"));
-		instructor.setFirstSurname(rs.getString("firstSurname"));
-		instructor.setSecondSurname(rs.getString("secondSurname"));
-		instructor.setEmail(rs.getString("email"));
-		instructor.setTelephone(rs.getInt("telephone"));
-		*/
+		instructor.setName( rs.getString("name") );
+		String nif = rs.getString( "nif" );
+		instructor.setNIF( nif );
+		instructor.setAddress( rs.getString( "address" ) );
+		instructor.setTelephone( rs.getInt( "telephone" ) );
+		instructor.setDate( rs.getDate(  "date" ) );
+		instructor.setBankAccount( rs.getString( "bankAccount" ) );
+		
+		instructor.setDegrees( getInstructorDegrees( nif ) );
 		
 		return instructor;
+	}
+	
+	private List<Degree> getInstructorDegrees( String nif ) {
+		
+		ConnectionDatabase c = new ConnectionDatabase(Log);
+		Connection connection = c.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		List<Degree> degreeList;
+		try {
+			stmt = connection.prepareStatement("SELECT * FROM Instructor_Degrees " 
+												+ "WHERE nif = ?;");
+			stmt.setString(1, nif);
+			rs = stmt.executeQuery();
+			
+			degreeList = new LinkedList<>();
+			while( rs.next() ) {
+				Degree degree = new Degree();
+				degree.setDegreeCode( rs.getInt( "codDegree" ) );
+				degree.setName( rs.getString( "name" ) );
+				degree.setDescription( rs.getString( "description" ) );
+				degreeList.add( degree );
+			}
+			
+		} catch (SQLException e) {
+			Log.severe("Error ejecutando preparedStatement");
+			e.printStackTrace();
+			return null;
+		} finally {
+			c.closeConnections(stmt, rs);
+		}
+		return degreeList;
+		
 	}
 	
 	public void addInstructor(Instructor instructor) {

@@ -6,6 +6,12 @@ public class Degree {
 	private String description;
 	private int degreeCode;
 	
+	public Degree() {
+		this.name = null;
+		this.description = null;
+		this.degreeCode = -1;
+	}
+	
 	public Degree(String name, String description, int degreeCode) {
 		this.name = name;
 		this.description = description;

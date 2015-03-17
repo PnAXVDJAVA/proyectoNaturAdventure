@@ -2,14 +2,13 @@ package dao;
 
 import java.sql.Date;
 import java.util.List;
-import common.MyAddress;
 
 public class Instructor {
 	private String NIF;
 	private String name;
 	private String firstSurname;
 	private String secondSurname;
-	private MyAddress address;
+	private String address;
 	private int telephone;
 	private Date date;
 	private String email;
@@ -26,7 +25,7 @@ public class Instructor {
 		this.degrees = null;
 	}
 	
-	public Instructor(String name, String nIF, MyAddress address,
+	public Instructor(String name, String nIF, String address,
 			int telephone, Date date, String bankAccount, List<Degree> degrees) {
 		this.name = name;
 		this.NIF = nIF;
@@ -67,10 +66,10 @@ public class Instructor {
 	public void setNIF(String nIF) {
 		NIF = nIF;
 	}
-	public MyAddress getAddress() {
+	public String getAddress() {
 		return address;
 	}
-	public void setAddress(MyAddress address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 	public int getTelephone() {

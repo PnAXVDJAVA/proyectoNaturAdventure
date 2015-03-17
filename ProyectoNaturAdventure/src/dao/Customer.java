@@ -2,7 +2,7 @@ package dao;
 
 public class Customer {
 
-	private String NIF;
+	private String nif;
 	private String name;
 	private String firstSurname;
 	private String secondSurname;
@@ -10,7 +10,7 @@ public class Customer {
 	private int telephone;
 	
 	public Customer() {
-		this.NIF = null;
+		this.nif = null;
 		this.name = null;
 		this.firstSurname = null;
 		this.secondSurname = null;
@@ -21,7 +21,7 @@ public class Customer {
 	public Customer(String nIF, String name, String firstSurname,
 			String secondSurname, String email, int telephone) {
 		super();
-		NIF = nIF;
+		nif = nIF;
 		this.name = name;
 		this.firstSurname = firstSurname;
 		this.secondSurname = secondSurname;
@@ -31,11 +31,11 @@ public class Customer {
 	
 	
 	public String getNIF() {
-		return NIF;
+		return nif;
 	}
 
 	public void setNIF(String nIF) {
-		NIF = nIF;
+		nif = nIF;
 	}
 
 	public String getName() {

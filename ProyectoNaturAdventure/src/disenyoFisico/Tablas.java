@@ -151,6 +151,7 @@ public class Tablas {
 		"		instructorNif VARCHAR( 10 )," +
 		"		codDegree INTEGER," +
 		"		description VARCHAR( 200 )," +
+		"		name VARCHAR( 50 )," +
 
 		"		CONSTRAINT cp_instructor_degrees PRIMARY KEY ( instructorNif, codDegree )," +
 		"		CONSTRAINT ca_instructor_degrees_instructor FOREIGN KEY ( instructorNif )" +

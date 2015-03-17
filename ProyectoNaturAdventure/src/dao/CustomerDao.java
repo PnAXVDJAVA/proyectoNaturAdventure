@@ -38,7 +38,7 @@ public class CustomerDao {
 	}
 	
 	//Devuelve un cliente indicando el nif
-	public Customer getCustomer(int nif) {
+	public Customer getCustomer(String nif) {
 		ConnectionDatabase c = new ConnectionDatabase(Log);
 		Connection connection = c.getConnection();
 		PreparedStatement stmt = null;
@@ -47,7 +47,7 @@ public class CustomerDao {
 		try {
 			stmt = connection.prepareStatement("SELECT * FROM Customer " 
 												+ "WHERE nif = ?;");
-			stmt.setInt(1, nif);
+			stmt.setString(1, nif);
 			rs = stmt.executeQuery();
 			customer = storeCustomer(rs);
 		} catch (SQLException e) {
