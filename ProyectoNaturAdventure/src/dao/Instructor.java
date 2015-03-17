@@ -128,5 +128,14 @@ public class Instructor {
 		this.degrees = degrees;
 	}
 	
-	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Name: " + name + " || Surname: " + firstSurname + " " + secondSurname + " || Adress: " + address 
+				+ "\nTelephone: " + telephone + " || Email: " + email + " || DateOfBirth: " + dateOfBirth 
+				+ "\nBancAccount: " + bankAccount + " || UserID: " + userID
+				+ "\nDegrees: ");
+		for (Degree d: degrees)
+			sb.append("\t"+d.toString()+"\n");
+		return sb.toString();
+	}
 }
