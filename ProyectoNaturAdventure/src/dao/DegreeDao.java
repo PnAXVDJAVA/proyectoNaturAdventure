@@ -26,7 +26,6 @@ public class DegreeDao {
 												+ "WHERE nif = ?;");
 			stmt.setString(1, nif);
 			rs = stmt.executeQuery();
-			rs.next();
 			degreeList = new LinkedList<>();
 			while( rs.next() ) {
 				Degree degree = new Degree();
