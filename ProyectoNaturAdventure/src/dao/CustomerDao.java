@@ -49,6 +49,7 @@ public class CustomerDao {
 												+ "WHERE nif = ?;");
 			stmt.setString(1, nif);
 			rs = stmt.executeQuery();
+			rs.next();
 			customer = storeCustomer(rs);
 		} catch (SQLException e) {
 			Log.severe("Error ejecutando preparedStatement");
@@ -101,7 +102,7 @@ public class CustomerDao {
 		PreparedStatement stmt = null;
 		try {
 			stmt = connection.prepareStatement(
-					"UPDATE Customer SET nif = ?, name = ?, firstSurname = ?," +
+					"UPDATE Customer SET name = ?, firstSurname = ?," +
 					"secondSurname = ?, email = ?, telephone = ?" +
 					" WHERE nif = ?;");
 			stmt.setString(1, customer.getName());
