@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -66,16 +65,19 @@ public class InstructorDao {
 	
 	private Instructor storeInstructor(ResultSet rs) throws SQLException {
 		Instructor instructor = new Instructor();
-		
+
+		String nif = rs.getString( "nif" );
+		instructor.setNif( nif );
 		instructor.setName( rs.getString( "name" ) );
 		instructor.setFirstSurname( rs.getString( "firstSurname" ) );
 		instructor.setSecondSurname( rs.getString( "secondSurname" ) );
-		String nif = rs.getString( "nif" );
-		instructor.setNif( nif );
 		instructor.setAddress( rs.getString( "address" ) );
 		instructor.setTelephone( rs.getInt( "telephone" ) );
-		instructor.setDateOfBirth( rs.getDate(  "date" ) );
+		instructor.setDateOfBirth( rs.getDate(  "dateOfBirth" ) );
+		instructor.setEmail( rs.getString(  "email" ) );
 		instructor.setBankAccount( rs.getString( "bankAccount" ) );
+		instructor.setUserID( rs.getString( "userID" ));
+		instructor.setPassword( rs.getString( "password" ) );		
 		instructor.setDegrees( getInstructorDegrees( nif ) );
 		
 		return instructor;
@@ -93,14 +95,15 @@ public class InstructorDao {
 												+ "WHERE nif = ?;");
 			stmt.setString(1, nif);
 			rs = stmt.executeQuery();
-			
+			rs.next();
 			degreeList = new LinkedList<>();
 			while( rs.next() ) {
 				Degree degree = new Degree();
-				degree.setDegreeCode( rs.getInt( "codDegree" ) );
-				degree.setName( rs.getString( "name" ) );
-				degree.setDescription( rs.getString( "description" ) );
 				degree.setInstructorNif( rs.getString( "instructorNif" ) );
+				degree.setCodDegree( rs.getInt( "codDegree" ) );
+				degree.setDescription( rs.getString( "description" ) );
+				degree.setName( rs.getString( "name" ) );
+				
 				degreeList.add( degree );
 			}
 			
@@ -112,55 +115,67 @@ public class InstructorDao {
 			c.closeConnections(stmt, rs);
 		}
 		return degreeList;
-		
 	}
 	
 	public void addInstructor(Instructor instructor) {
 		ConnectionDatabase c = new ConnectionDatabase(Log);
 		Connection connection = c.getConnection();
-		/*PreparedStatement stmt = null;
+		PreparedStatement stmt = null;
 		try {
 			stmt = connection.prepareStatement(
 					"INSERT INTO Instructor(nif, name, firstSurname," +
-					"secondSurname, email, telephone)" + 
-					" VALUES(?, ?, ?, ?, ?, ?);");
-			stmt.setString(1, instructor.getNIF());
+					"secondSurname, address, telephone, dateOfBirth," +
+					"email, bankAccount, userID, password)" + 
+					" VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+			stmt.setString(1, instructor.getNif());
 			stmt.setString(2, instructor.getName());
 			stmt.setString(3, instructor.getFirstSurname());
 			stmt.setString(4, instructor.getSecondSurname());
-			stmt.setString(5, instructor.getEmail());
+			stmt.setString(5, instructor.getAddress());
 			stmt.setInt(6, instructor.getTelephone());
+			stmt.setDate(7, instructor.getDateOfBirth());
+			stmt.setString(8, instructor.getEmail());
+			stmt.setString(9, instructor.getBankAccount());
+			stmt.setString(10, instructor.getUserID());
+			stmt.setString(11, instructor.getPassword());
 			stmt.execute();
 		} catch (SQLException e) {
 			Log.severe("Error ejecutando preparedStatement");
 			e.printStackTrace();
 		} finally {
 			c.closeConnections(stmt);
-		}*/
+		}
 	}
 	
 	public void updateInstructor(Instructor instructor) {
 		ConnectionDatabase c = new ConnectionDatabase(Log);
 		Connection connection = c.getConnection();
-		/*PreparedStatement stmt = null;
+		PreparedStatement stmt = null;
 		try {
 			stmt = connection.prepareStatement(
-					"UPDATE Instructor SET nif = ?, name = ?, firstSurname = ?," +
-					"secondSurname = ?, email = ?, telephone = ?" +
-					" WHERE nif = ?;");
+					"UPDATE Instructor SET name = ?, firstSurname = ?," +
+					"secondSurname = ?, address = ?, telephone = ?, dateOfBirth = ?," +
+					"email = ?, bankAccount = ?, userID = ?, password = ?" +
+					" where nif = ?;");
+			
 			stmt.setString(1, instructor.getName());
 			stmt.setString(2, instructor.getFirstSurname());
 			stmt.setString(3, instructor.getSecondSurname());
-			stmt.setString(4, instructor.getEmail());
+			stmt.setString(4, instructor.getAddress());
 			stmt.setInt(5, instructor.getTelephone());
-			stmt.setString(6, instructor.getNIF());
+			stmt.setDate(6, instructor.getDateOfBirth());
+			stmt.setString(7, instructor.getEmail());
+			stmt.setString(8, instructor.getBankAccount());
+			stmt.setString(9, instructor.getUserID());
+			stmt.setString(10, instructor.getPassword());
+			stmt.setString(11, instructor.getNif());
 			stmt.execute();
 		} catch (SQLException e) {
 			Log.severe("Error ejecutando preparedStatement");
 			e.printStackTrace();
 		} finally {
 			c.closeConnections(stmt);
-		}*/
+		}
 	}
 	
 	public void deleteInstructor(Instructor instructor) {

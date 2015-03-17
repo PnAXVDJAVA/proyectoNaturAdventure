@@ -11,54 +11,81 @@ public class Activity {
 	private int minPartakers;
 	private Level level;
 	
+	public Activity() {
+		this.codActivity = -1;
+		this.name = null;
+		this.description = null;
+		this.pricePerPerson = -1;
+		this.duration = -1;
+		this.maxPartakers = -1;
+		this.minPartakers = -1;
+		this.level = null;
+	}
+	
 	public int getCodActivity() {
 		return codActivity;
 	}
-	public void setCodActivity(int codActivity){
+
+	public void setCodActivity(int codActivity) {
 		this.codActivity = codActivity;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public double getPricePerPerson() {
 		return pricePerPerson;
 	}
+
 	public void setPricePerPerson(double pricePerPerson) {
 		this.pricePerPerson = pricePerPerson;
 	}
+
 	public int getDuration() {
 		return duration;
 	}
+
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
+
 	public int getMaxPartakers() {
 		return maxPartakers;
 	}
+
 	public void setMaxPartakers(int maxPartakers) {
 		this.maxPartakers = maxPartakers;
 	}
+
 	public int getMinPartakers() {
 		return minPartakers;
 	}
+
 	public void setMinPartakers(int minPartakers) {
 		this.minPartakers = minPartakers;
 	}
+
 	public Level getLevel() {
 		return level;
 	}
+
 	public void setLevel(Level level) {
 		this.level = level;
 	}
+
 	@Override
 	public String toString() {
 		return name + "\n" + description + "\n" + "Level: " + level + "--Duration: " + duration + "--MaxPartakers: " 

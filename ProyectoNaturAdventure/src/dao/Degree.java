@@ -1,53 +1,52 @@
 package dao;
 
 public class Degree {
-	
-	private String name;
-	private String description;
-	private int degreeCode;
 	private String instructorNif;
+	private int codDegree;
+	private String description;
+	private String name;
 	
 	public Degree() {
-		this.name = null;
-		this.description = null;
-		this.degreeCode = -1;
 		this.instructorNif = null;
-	}
-
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getDescription() {
-		return description;
+		this.codDegree = -1;
+		this.description = null;
+		this.name = null;
 	}
 	
 	public String getInstructorNif() {
-		return this.instructorNif;
+		return instructorNif;
+	}
+
+	public void setInstructorNif(String instructorNif) {
+		this.instructorNif = instructorNif;
+	}
+
+	public int getCodDegree() {
+		return codDegree;
+	}
+
+	public void setCodDegree(int codDegree) {
+		this.codDegree = codDegree;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public int getDegreeCode() {
-		return degreeCode;
+	public String getName() {
+		return name;
 	}
 
-	public void setDegreeCode(int degreeCode) {
-		this.degreeCode = degreeCode;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
-	public void setInstructorNif( String instructorNif ) {
-		this.instructorNif = instructorNif;
-	}
-	
+
 	@Override
 	public String toString() {
-		return "Cod: " + degreeCode + "\nDescription: " + description;
+		return "Cod: " + codDegree + "\nDescription: " + description;
 	}
 }
