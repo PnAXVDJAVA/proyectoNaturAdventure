@@ -1,12 +1,12 @@
 package common;
 
-public class Address {
+public class MyAddress {
 	private String dir;
 	private int postcode;
 	private String town;
 	private String province;
 
-	public Address(String dir, int postcode, String town, String province) {
+	public MyAddress(String dir, int postcode, String town, String province) {
 		this.dir = dir;
 		this.postcode = postcode;
 		this.town = town;

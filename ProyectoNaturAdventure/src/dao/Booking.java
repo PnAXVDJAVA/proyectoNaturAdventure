@@ -1,6 +1,6 @@
 package dao;
 
-import common.Date;
+import java.sql.Date;
 
 public class Booking {
 	private int codBooking;
@@ -8,8 +8,9 @@ public class Booking {
 	private int numPartakers;
 	private Date bookingDate;
 	private String customerNif;
-	private StartHour starHour;
+	private StartHour startHour;
 	private String status;
+	private int codActivity;
 	
 	public Booking() {
 		this.codBooking = -1;
@@ -17,16 +18,18 @@ public class Booking {
 		this.numPartakers = -1;
 		this.bookingDate = null;
 		this.customerNif = null;
-		this.starHour = null;
+		this.startHour = null;
+		this.codActivity = -1;
 	}
 	
 	public Booking(Date proposalPerformingDate, int numPartakers,
-			Date bookingDate, String customerNif, StartHour starHour) {
+			Date bookingDate, String customerNif, StartHour startHour, int codActivity) {
 		this.proposalPerformingDate = proposalPerformingDate;
 		this.numPartakers = numPartakers;
 		this.bookingDate = bookingDate;
 		this.customerNif = customerNif;
-		this.starHour = starHour;
+		this.startHour = startHour;
+		this.codActivity = codActivity;
 	}
 
 	public int getCodBooking() {
@@ -69,12 +72,12 @@ public class Booking {
 		this.customerNif = customerNif;
 	}
 
-	public StartHour getStarHour() {
-		return starHour;
+	public StartHour getStartHour() {
+		return startHour;
 	}
 
-	public void setStarHour(StartHour starHour) {
-		this.starHour = starHour;
+	public void setStartHour(StartHour startHour) {
+		this.startHour = startHour;
 	}
 
 	public String getStatus() {
@@ -83,6 +86,14 @@ public class Booking {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public int getCodActivity() {
+		return codActivity;
+	}
+
+	public void setCodActivity(int codActivity) {
+		this.codActivity = codActivity;
 	}
 	
 }

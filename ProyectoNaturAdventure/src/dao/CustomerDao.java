@@ -8,81 +8,131 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import conexion.ConnectionManager;
+import common.ConnectionDatabase;
 
 public class CustomerDao {
-	
 	//creamos el log para poder registrar todos los errores inesperados
-		private final static Logger Log = Logger.getLogger(ActivityDao.class.getName()); 
-		
-		public Set<Customer> getCustomers() {
-			Connection connection = null;
-			try {
-				connection = ConnectionManager.getConnection();
+	private final static Logger Log = Logger.getLogger(CustomerDao.class.getName()); 
+	
+	//Buscamos todos los clientes en la base de datos
+	public Set<Customer> getCustomers() {
+		ConnectionDatabase c = new ConnectionDatabase(Log);
+		Connection connection = c.getConnection();
+		Set<Customer> customers = new HashSet<Customer>();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = connection.prepareStatement("SELECT * FROM Customer;");
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				customers.add(storeCustomer(rs));
 			}
-			catch (ClassNotFoundException e) {
-				Log.severe("El driver JDBC no se ha encontrado");
-				e.printStackTrace();
-				return null;
-			}
-			catch (SQLException e) {
-				Log.severe("Error creando la conexion JDBC");
-				e.printStackTrace();
-				return null;
-			}
-			
-			
-			Set<Customer> customers = new HashSet<Customer>();
-			PreparedStatement stmt = null;
-			ResultSet rs = null;
-			
-			try {
-				
-				stmt = connection.prepareStatement( "select * from Customer" );
-				rs = stmt.executeQuery();
-				
-				while( rs.next() ) {
-					Customer customer = new Customer();
-					customer.setNIF( rs.getString( "nif" ) );
-					customer.setName( rs.getString( "name" ) );
-					customer.setEmail( rs.getString( "email" ) );
-					customer.setTelephone( rs.getInt( "telephone" ) );
-					customers.add( customer );
-				}
-				
-			}
-			
-			catch (SQLException e) {
-					Log.severe("Error ejecutando preparedStatement");
-					e.printStackTrace();
-					return null;
-			}
-			
-			finally {
-					if (rs != null) {
-						try {
-							rs.close();
-						} catch (SQLException e) {
-							Log.warning("Error cerrando ResultSet");
-							e.printStackTrace();
-						}
-					}
-					if (stmt != null) {
-						try {
-							stmt.close();
-						} catch (SQLException e) {
-							Log.warning("Error cerrando PreparedStatement");
-							e.printStackTrace();
-						}
-					} try {
-						connection.close();
-					} catch (SQLException e) {
-						Log.warning("Error cerrando la conexion JDBC");
-						e.printStackTrace();
-					}
-				}
-			
-			return customers;
+		} catch (SQLException e) {
+			Log.severe("Error ejecutando preparedStatement");
+			e.printStackTrace();
+			return null;
+		} finally {
+			c.closeConnections(stmt, rs);
 		}
-
+		return customers;
+	}
+	
+	//Devuelve un cliente indicando el nif
+	public Customer getCustomer(int nif) {
+		ConnectionDatabase c = new ConnectionDatabase(Log);
+		Connection connection = c.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Customer customer = null;
+		try {
+			stmt = connection.prepareStatement("SELECT * FROM Customer " 
+												+ "WHERE nif = ?;");
+			stmt.setInt(1, nif);
+			rs = stmt.executeQuery();
+			customer = storeCustomer(rs);
+		} catch (SQLException e) {
+			Log.severe("Error ejecutando preparedStatement");
+			e.printStackTrace();
+			return null;
+		} finally {
+			c.closeConnections(stmt, rs);
+		}
+		return customer;
+	}
+	
+	private Customer storeCustomer(ResultSet rs) throws SQLException {
+		Customer customer = new Customer();
+		customer.setNIF(rs.getString("nif"));
+		customer.setName(rs.getString("name"));
+		customer.setFirstSurname(rs.getString("firstSurname"));
+		customer.setSecondSurname(rs.getString("secondSurname"));
+		customer.setEmail(rs.getString("email"));
+		customer.setTelephone(rs.getInt("telephone"));
+		return customer;
+	}
+	
+	public void addCustomer(Customer customer) {
+		ConnectionDatabase c = new ConnectionDatabase(Log);
+		Connection connection = c.getConnection();
+		PreparedStatement stmt = null;
+		try {
+			stmt = connection.prepareStatement(
+					"INSERT INTO Customer(nif, name, firstSurname," +
+					"secondSurname, email, telephone)" + 
+					" VALUES(?, ?, ?, ?, ?, ?);");
+			stmt.setString(1, customer.getNIF());
+			stmt.setString(2, customer.getName());
+			stmt.setString(3, customer.getFirstSurname());
+			stmt.setString(4, customer.getSecondSurname());
+			stmt.setString(5, customer.getEmail());
+			stmt.setInt(6, customer.getTelephone());
+			stmt.execute();
+		} catch (SQLException e) {
+			Log.severe("Error ejecutando preparedStatement");
+			e.printStackTrace();
+		} finally {
+			c.closeConnections(stmt);
+		}
+	}
+	
+	public void updateCustomer(Customer customer) {
+		ConnectionDatabase c = new ConnectionDatabase(Log);
+		Connection connection = c.getConnection();
+		PreparedStatement stmt = null;
+		try {
+			stmt = connection.prepareStatement(
+					"UPDATE Customer SET nif = ?, name = ?, firstSurname = ?," +
+					"secondSurname = ?, email = ?, telephone = ?" +
+					" WHERE nif = ?;");
+			stmt.setString(1, customer.getName());
+			stmt.setString(2, customer.getFirstSurname());
+			stmt.setString(3, customer.getSecondSurname());
+			stmt.setString(4, customer.getEmail());
+			stmt.setInt(5, customer.getTelephone());
+			stmt.setString(6, customer.getNIF());
+			stmt.execute();
+		} catch (SQLException e) {
+			Log.severe("Error ejecutando preparedStatement");
+			e.printStackTrace();
+		} finally {
+			c.closeConnections(stmt);
+		}
+	}
+	
+	public void deleteCustomer(Customer customer) {
+		ConnectionDatabase c = new ConnectionDatabase(Log);
+		Connection connection = c.getConnection();
+		PreparedStatement stmt = null;
+		try {
+			stmt = connection.prepareStatement("DELETE FROM Customer WHERE nif = ?;");
+			stmt.setString(1, customer.getNIF());
+			stmt.execute();
+		}  catch (SQLException e) {
+			Log.severe("Error ejecutando preparedStatement");
+			e.printStackTrace();
+			return;
+		} finally {
+			c.closeConnections(stmt);
+		}
+	}
 }
