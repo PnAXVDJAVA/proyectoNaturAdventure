@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -152,6 +150,7 @@ public class InstructorDao {
 			stmt = connection.prepareStatement("DELETE FROM Instructor WHERE nif = ?;");
 			stmt.setString(1, instructor.getNif());
 			stmt.execute();
+			new DegreeDao().deleteDegree(instructor.getNif());
 		}  catch (SQLException e) {
 			Log.severe("Error ejecutando preparedStatement");
 			e.printStackTrace();

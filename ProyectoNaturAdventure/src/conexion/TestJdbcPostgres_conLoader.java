@@ -5,7 +5,6 @@
 
 package conexion;
 
-import java.util.logging.Logger;
 import java.io.InputStream;
 import java.sql.DriverManager;
 import java.sql.Connection;
