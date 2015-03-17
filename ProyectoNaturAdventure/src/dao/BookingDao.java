@@ -49,6 +49,7 @@ public class BookingDao {
 												+ "WHERE codBooking = ?;");
 			stmt.setInt(1, codBooking);
 			rs = stmt.executeQuery();
+			rs.next();
 			booking = storeBooking(rs);
 		} catch (SQLException e) {
 			Log.severe("Error ejecutando preparedStatement");
@@ -68,7 +69,7 @@ public class BookingDao {
 		booking.setBookingDate(rs.getDate("bookingDate"));
 		booking.setCustomerNif(rs.getString("customerNif"));
 		booking.setStartHour(StartHour.getOpcion(rs.getString("startHour")));
-		booking.setStatus(rs.getString("status"));
+		booking.setStatus(BookingStatus.getOpcion(rs.getString("status")));
 		booking.setCodActivity(rs.getInt("codActivity"));
 		return booking;
 	}
@@ -88,7 +89,7 @@ public class BookingDao {
 			stmt.setDate(4, booking.getBookingDate());
 			stmt.setString(5, booking.getCustomerNif());
 			stmt.setString(6, booking.getStartHour().toString());
-			stmt.setString(7, booking.getStatus());
+			stmt.setString(7, booking.getStatus().toString());
 			stmt.setInt(8, booking.getCodActivity());
 			stmt.execute();
 		} catch (SQLException e) {
@@ -114,7 +115,7 @@ public class BookingDao {
 			stmt.setDate(3, booking.getBookingDate());
 			stmt.setString(4, booking.getCustomerNif());
 			stmt.setString(5, booking.getStartHour().toString());
-			stmt.setString(6, booking.getStatus());
+			stmt.setString(6, booking.getStatus().toString());
 			stmt.setInt(7, booking.getCodActivity());
 			stmt.setInt(8, booking.getCodBooking());
 			

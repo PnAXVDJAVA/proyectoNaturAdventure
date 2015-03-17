@@ -9,7 +9,7 @@ public class Booking {
 	private Date bookingDate;
 	private String customerNif;
 	private StartHour startHour;
-	private String status;
+	private BookingStatus status;
 	private int codActivity;
 	
 	public Booking() {
@@ -20,16 +20,7 @@ public class Booking {
 		this.customerNif = null;
 		this.startHour = null;
 		this.codActivity = -1;
-	}
-	
-	public Booking(Date proposalPerformingDate, int numPartakers,
-			Date bookingDate, String customerNif, StartHour startHour, int codActivity) {
-		this.proposalPerformingDate = proposalPerformingDate;
-		this.numPartakers = numPartakers;
-		this.bookingDate = bookingDate;
-		this.customerNif = customerNif;
-		this.startHour = startHour;
-		this.codActivity = codActivity;
+		this.status = null;
 	}
 
 	public int getCodBooking() {
@@ -80,11 +71,11 @@ public class Booking {
 		this.startHour = startHour;
 	}
 
-	public String getStatus() {
+	public BookingStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(BookingStatus status) {
 		this.status = status;
 	}
 
