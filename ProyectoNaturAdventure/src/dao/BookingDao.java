@@ -82,7 +82,7 @@ public class BookingDao {
 			stmt = connection.prepareStatement(
 				   "INSERT INTO Booking(codBooking, proposalPerformingDate," +
 				   "numPartakers, bookingDate, customerNif, startHour, status, codActivity)" + 
-				   " VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
+				   " VALUES(?, ?, ?, ?, ?, cast ( ? as StartHour) , cast( ? as BookingStatus), ?);");
 			stmt.setInt(1, booking.getCodBooking());
 			stmt.setDate(2, booking.getProposalPerformingDate());
 			stmt.setInt(3, booking.getNumPartakers());
@@ -108,7 +108,7 @@ public class BookingDao {
 			stmt = connection.prepareStatement(
 					"UPDATE Booking SET proposalPerformingDate = ?," +
 							   "numPartakers = ?, bookingDate = ?, customerNif = ?," +
-							   "startHour = ?, status = ?, codActivity = ?" +
+							   "startHour = cast( ? as StartHour) , status = cast( ? as BookingStatus), codActivity = ?" +
 							   " WHERE codBooking = ?;");
 			stmt.setDate(1, booking.getProposalPerformingDate());
 			stmt.setInt(2, booking.getNumPartakers());

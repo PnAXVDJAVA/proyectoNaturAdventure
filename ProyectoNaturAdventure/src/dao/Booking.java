@@ -86,5 +86,10 @@ public class Booking {
 	public void setCodActivity(int codActivity) {
 		this.codActivity = codActivity;
 	}
-	
+	@Override
+	public String toString() {
+		return "CodBooking: " + codBooking + " || CodActivity: " + codActivity + " || Date: " + bookingDate.toString()
+				+ " || Nif: " + customerNif + "\nProposalDate: " + proposalPerformingDate.toString() + " || StartHour: " 
+				+ startHour + " || Status: " +status;
+	}
 }
