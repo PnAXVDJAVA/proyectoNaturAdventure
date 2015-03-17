@@ -52,6 +52,7 @@ public class InstructorDao {
 												+ "WHERE nif = ?;");
 			stmt.setString(1, nif);
 			rs = stmt.executeQuery();
+			rs.next();
 			instructor = storeInstructor(rs);
 		} catch (SQLException e) {
 			Log.severe("Error ejecutando preparedStatement");
@@ -66,14 +67,15 @@ public class InstructorDao {
 	private Instructor storeInstructor(ResultSet rs) throws SQLException {
 		Instructor instructor = new Instructor();
 		
-		instructor.setName( rs.getString("name") );
+		instructor.setName( rs.getString( "name" ) );
+		instructor.setFirstSurname( rs.getString( "firstSurname" ) );
+		instructor.setSecondSurname( rs.getString( "secondSurname" ) );
 		String nif = rs.getString( "nif" );
 		instructor.setNIF( nif );
 		instructor.setAddress( rs.getString( "address" ) );
 		instructor.setTelephone( rs.getInt( "telephone" ) );
 		instructor.setDate( rs.getDate(  "date" ) );
 		instructor.setBankAccount( rs.getString( "bankAccount" ) );
-		
 		instructor.setDegrees( getInstructorDegrees( nif ) );
 		
 		return instructor;
