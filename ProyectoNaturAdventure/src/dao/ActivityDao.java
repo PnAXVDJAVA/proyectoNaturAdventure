@@ -88,9 +88,9 @@ public class ActivityDao {
 		
 		try {
 			stmt = connection.prepareStatement(
-				   "insert into Activity(codActivity, name, description, pricePerPerson,"
-				   + " duration, maxPartakers, minPartakers, level) "
-				   + " values(?, ?, ?, ?, ?, ?, ?, ?)");
+					   "insert into Activity(codActivity, name, description, pricePerPerson,"
+					   + " duration, maxPartakers, minPartakers, level) "
+					   + " values(?, ?, ?, ?, ?, ?, ?, cast(? as ActivityLevel))");
 			stmt.setInt(1, activity.getCodActivity());
 			stmt.setString(2, activity.getName());
 			stmt.setString(3, activity.getDescription());
@@ -117,9 +117,9 @@ public class ActivityDao {
 		
 		try {
 			stmt = connection.prepareStatement(
-				   "update Activity set name = ?, description = ?, pricePerPerson = ?,"
-					+ " duration = ?, maxPartakers = ?, minPartakers = ?, level = ?"
-					+ " where codActivity = ?");
+					   "update Activity set name = ?, description = ?, pricePerPerson = ?,"
+						+ " duration = ?, maxPartakers = ?, minPartakers = ?, level = cast(? as ActivityLevel)"
+						+ " where codActivity = ?");
 			stmt.setString(1, activity.getName());
 			stmt.setString(2, activity.getDescription());
 			stmt.setDouble(3, activity.getPricePerPerson());

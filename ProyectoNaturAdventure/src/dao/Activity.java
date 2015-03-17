@@ -59,11 +59,9 @@ public class Activity {
 	public void setLevel(Level level) {
 		this.level = level;
 	}
-	
 	@Override
 	public String toString() {
-		return "\t" + name + "\n" + description + "\n\n" + "Level: " + level + "--Duration: " + duration + "--MaxPartakers: " 
+		return name + "\n" + description + "\n" + "Level: " + level + "--Duration: " + duration + "--MaxPartakers: " 
 				+ maxPartakers + "--MinPartakers: " + minPartakers;
 	}
-	
 }
