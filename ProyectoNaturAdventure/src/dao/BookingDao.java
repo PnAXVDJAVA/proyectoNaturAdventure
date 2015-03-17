@@ -49,6 +49,7 @@ public class BookingDao {
 												+ "WHERE codBooking = ?;");
 			stmt.setInt(1, codBooking);
 			rs = stmt.executeQuery();
+			rs.next();
 			booking = storeBooking(rs);
 		} catch (SQLException e) {
 			Log.severe("Error ejecutando preparedStatement");

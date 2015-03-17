@@ -11,14 +11,9 @@ public class Degree {
 		this.name = null;
 		this.description = null;
 		this.degreeCode = -1;
+		this.instructorNif = null;
 	}
-	
-	public Degree(String name, String description, int degreeCode) {
-		this.name = name;
-		this.description = description;
-		this.degreeCode = degreeCode;
-	}
-	
+
 	public String getName() {
 		return name;
 	}

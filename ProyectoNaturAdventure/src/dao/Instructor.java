@@ -4,95 +4,126 @@ import java.sql.Date;
 import java.util.List;
 
 public class Instructor {
-	private String NIF;
+	private String nif;
 	private String name;
 	private String firstSurname;
 	private String secondSurname;
 	private String address;
 	private int telephone;
-	private Date date;
+	private Date dateOfBirth;
 	private String email;
 	private String bankAccount;
+	private String userID;
+	private String password;
 	private List<Degree> degrees;
 	
 	public Instructor() {
+		this.nif = null;
 		this.name = null;
-		this.NIF = null;
+		this.firstSurname = null;
+		this.secondSurname = null;
 		this.address = null;
 		this.telephone = -1;
-		this.date = null;
+		this.dateOfBirth = null;
+		this.email = null;
 		this.bankAccount = null;
+		this.userID = null;
+		this.password = null;
 		this.degrees = null;
 	}
-	
-	public Instructor(String name, String nIF, String address,
-			int telephone, Date date, String bankAccount, List<Degree> degrees) {
-		this.name = name;
-		this.NIF = nIF;
-		this.address = address;
-		this.telephone = telephone;
-		this.date = date;
-		this.bankAccount = bankAccount;
-		this.degrees = degrees;
+
+	public String getNif() {
+		return nif;
 	}
-	
-	public String getFirstSurname() {
-		return firstSurname;
+
+	public void setNif(String nif) {
+		this.nif = nif;
 	}
-	public void setFirstSurname(String firstSurname) {
-		this.firstSurname = firstSurname;
-	}
-	public String getSecondSurname() {
-		return secondSurname;
-	}
-	public void setSecondSurname(String secondSurname) {
-		this.secondSurname = secondSurname;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getNIF() {
-		return NIF;
+
+	public String getFirstSurname() {
+		return firstSurname;
 	}
-	public void setNIF(String nIF) {
-		NIF = nIF;
+
+	public void setFirstSurname(String firstSurname) {
+		this.firstSurname = firstSurname;
 	}
+
+	public String getSecondSurname() {
+		return secondSurname;
+	}
+
+	public void setSecondSurname(String secondSurname) {
+		this.secondSurname = secondSurname;
+	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	public int getTelephone() {
 		return telephone;
 	}
+
 	public void setTelephone(int telephone) {
 		this.telephone = telephone;
 	}
-	public Date getDate() {
-		return date;
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getBankAccount() {
 		return bankAccount;
 	}
+
 	public void setBankAccount(String bankAccount) {
 		this.bankAccount = bankAccount;
 	}
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public List<Degree> getDegrees() {
 		return degrees;
 	}
+
 	public void setDegrees(List<Degree> degrees) {
 		this.degrees = degrees;
 	}
