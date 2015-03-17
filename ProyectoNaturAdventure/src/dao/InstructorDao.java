@@ -78,44 +78,12 @@ public class InstructorDao {
 		instructor.setBankAccount( rs.getString( "bankAccount" ) );
 		instructor.setUserID( rs.getString( "userID" ));
 		instructor.setPassword( rs.getString( "password" ) );		
-		instructor.setDegrees( getInstructorDegrees( nif ) );
+		instructor.setDegrees( new DegreeDao().getInstructorDegrees( nif ) );
 		
 		return instructor;
 	}
 	
-	private List<Degree> getInstructorDegrees( String nif ) {
-		
-		ConnectionDatabase c = new ConnectionDatabase(Log);
-		Connection connection = c.getConnection();
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		List<Degree> degreeList;
-		try {
-			stmt = connection.prepareStatement("SELECT * FROM Instructor_Degrees " 
-												+ "WHERE nif = ?;");
-			stmt.setString(1, nif);
-			rs = stmt.executeQuery();
-			rs.next();
-			degreeList = new LinkedList<>();
-			while( rs.next() ) {
-				Degree degree = new Degree();
-				degree.setInstructorNif( rs.getString( "instructorNif" ) );
-				degree.setCodDegree( rs.getInt( "codDegree" ) );
-				degree.setDescription( rs.getString( "description" ) );
-				degree.setName( rs.getString( "name" ) );
-				
-				degreeList.add( degree );
-			}
-			
-		} catch (SQLException e) {
-			Log.severe("Error ejecutando preparedStatement");
-			e.printStackTrace();
-			return null;
-		} finally {
-			c.closeConnections(stmt, rs);
-		}
-		return degreeList;
-	}
+	
 	
 	public void addInstructor(Instructor instructor) {
 		ConnectionDatabase c = new ConnectionDatabase(Log);
