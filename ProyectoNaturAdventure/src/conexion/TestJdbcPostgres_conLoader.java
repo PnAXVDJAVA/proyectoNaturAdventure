@@ -10,6 +10,8 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.io.IOException;
@@ -258,12 +260,12 @@ public class TestJdbcPostgres_conLoader {
 		
 		Customer customer2 = new Customer();
 		nif2 = "x987654321";
-		customer1.setNIF(nif1);
-		customer1.setName("Jorge");
-		customer1.setFirstSurname("Vicente");
-		customer1.setSecondSurname("Cantero");
-		customer1.setEmail("al259547@uji.es");
-		customer1.setTelephone(669457565);
+		customer2.setNIF(nif2);
+		customer2.setName("Jorge");
+		customer2.setFirstSurname("Vicente");
+		customer2.setSecondSurname("Cantero");
+		customer2.setEmail("al259547@uji.es");
+		customer2.setTelephone(669457565);
 		
 		cusDao.addCustomer(customer2);
 		System.out.println("Añadido customer2: " + cusDao.getCustomer(nif2).toString());
@@ -294,6 +296,9 @@ public class TestJdbcPostgres_conLoader {
 		
 		/* ADD Y GET */
 		BookingDao bookingDao = new BookingDao();
+		List<Instructor> listaInstructors = new LinkedList<Instructor>();
+		listaInstructors.add(instructor1);
+		listaInstructors.add(instructor1);
 		
 		System.out.println( "-----------------------------" );
 		System.out.println( "ADD Y GET" );
@@ -308,19 +313,22 @@ public class TestJdbcPostgres_conLoader {
 		booking1.setProposalPerformingDate(new Date(2015, 05, 25));
 		booking1.setStartHour(StartHour.morning);
 		booking1.setStatus(BookingStatus.pending);
+		booking1.setAssignedInstructors(listaInstructors);
+		
 		
 		bookingDao.addBooking(booking1);
 		System.out.println("Añadido booking1: " + bookingDao.getBooking(1));
 		
 		Booking booking2 = new Booking();
-		booking1.setCodBooking(2);
-		booking1.setCodActivity(2);
-		booking1.setBookingDate(new Date(2014, 02, 10));
-		booking1.setCustomerNif("y987654321");
-		booking1.setNumPartakers(2);
-		booking1.setProposalPerformingDate(new Date(2015, 01, 01));
-		booking1.setStartHour(StartHour.afternoon);
-		booking1.setStatus(BookingStatus.pending);
+		booking2.setCodBooking(2);
+		booking2.setCodActivity(2);
+		booking2.setBookingDate(new Date(2014, 02, 10));
+		booking2.setCustomerNif("x987654321");
+		booking2.setNumPartakers(2);
+		booking2.setProposalPerformingDate(new Date(2015, 01, 01));
+		booking2.setStartHour(StartHour.afternoon);
+		booking2.setStatus(BookingStatus.pending);
+		booking2.setAssignedInstructors(listaInstructors);
 		
 		bookingDao.addBooking(booking2);
 		System.out.println("Añadido booking2: " + bookingDao.getBooking(2));

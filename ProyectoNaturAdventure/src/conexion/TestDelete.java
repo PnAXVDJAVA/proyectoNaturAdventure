@@ -67,6 +67,18 @@ public class TestDelete {
 		
 		/* DELETE */
 		
+		/***** BOOKING *****/
+		
+		BookingDao bookingDao = new BookingDao();
+		Booking booking = null;
+		
+		for( int i = 1; i <= 2; i++) {
+			booking = new Booking();
+			booking.setCodBooking(i);
+			bookingDao.deleteBooking(booking);
+			System.out.println("Borrado reserva " + i);
+		}
+		
 		/***** ACTIVIDADES *****/
 		
 		
@@ -105,18 +117,6 @@ public class TestDelete {
 			customer.setNIF(customerNifs[i-1]);
 			customerDao.deleteCustomer(customer);
 			System.out.println("Borrado cliente " + i);
-		}
-		
-		/***** BOOKING *****/
-		
-		BookingDao bookingDao = new BookingDao();
-		Booking booking = null;
-		
-		for( int i = 1; i <= 2; i++) {
-			booking = new Booking();
-			booking.setCodBooking(i);
-			bookingDao.deleteBooking(booking);
-			System.out.println("Borrado reserva " + i);
 		}
 	}
 }
