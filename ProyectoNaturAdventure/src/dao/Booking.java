@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Booking {
 	private int codBooking;
@@ -11,6 +13,7 @@ public class Booking {
 	private StartHour startHour;
 	private BookingStatus status;
 	private int codActivity;
+	private List<Instructor> assignedInstructorsList;
 	
 	public Booking() {
 		this.codBooking = -1;
@@ -21,6 +24,7 @@ public class Booking {
 		this.startHour = null;
 		this.codActivity = -1;
 		this.status = null;
+		this.assignedInstructorsList = null;
 	}
 
 	public int getCodBooking() {
@@ -86,6 +90,22 @@ public class Booking {
 	public void setCodActivity(int codActivity) {
 		this.codActivity = codActivity;
 	}
+	
+	public List<Instructor> getAssignedInstructors() {	
+		return this.assignedInstructorsList;
+	}
+	
+	public void setAssignedInstructors( List<Instructor> list ) {
+		this.assignedInstructorsList = list;
+	}
+	
+	public void assignInstructor( Instructor instructor ) {
+		if( this.assignedInstructorsList == null ) {
+			this.assignedInstructorsList = new LinkedList<>();
+		}
+		this.assignedInstructorsList.add( instructor );
+	}
+	
 	@Override
 	public String toString() {
 		return "CodBooking: " + codBooking + " || CodActivity: " + codActivity + " || Date: " + bookingDate.toString()

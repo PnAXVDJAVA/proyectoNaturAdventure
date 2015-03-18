@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -141,6 +142,32 @@ public class BookingDao {
 			Log.severe("Error ejecutando preparedStatement");
 			e.printStackTrace();
 			return;
+		} finally {
+			c.closeConnections(stmt);
+		}
+	}
+	
+	public void assignInstructors( Booking booking ) {
+		ConnectionDatabase c = new ConnectionDatabase(Log);
+		Connection connection = c.getConnection();
+		PreparedStatement stmt = null;
+		try {
+			
+			List<Instructor> assignedInstructorsList = booking.getAssignedInstructors();
+			
+			for( Instructor instructor: assignedInstructorsList ) {
+				
+				stmt = connection.prepareStatement(
+						   "INSERT INTO Booking_Assigns( codBooking, instructorNif )" + 
+						   " VALUES(?, ?);");
+				stmt.setInt(1, booking.getCodBooking());
+				stmt.setString(2, instructor.getNif());
+				stmt.execute();
+			}
+			
+		} catch (SQLException e) {
+			Log.severe("Error ejecutando preparedStatement");
+			e.printStackTrace();
 		} finally {
 			c.closeConnections(stmt);
 		}

@@ -106,8 +106,6 @@ public class InstructorDao {
 			
 			stmt.execute();
 			
-			addInstructorDegrees( instructor );
-			
 		} catch (SQLException e) {
 			Log.severe("Error ejecutando preparedStatement");
 			e.printStackTrace();

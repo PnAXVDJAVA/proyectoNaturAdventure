@@ -165,6 +165,9 @@ public class TestJdbcPostgres_conLoader {
 		instructor1.addDegree( degree1_2 );
 		
 		instructorDao.addInstructor( instructor1 );
+		
+		instructorDao.addInstructorDegrees( instructor1 );
+		
 		System.out.println( "A�adido instructor1: " + instructorDao.getInstructor( nif1 ).toString() );
 		
 		Instructor instructor2 = new Instructor();
@@ -186,6 +189,9 @@ public class TestJdbcPostgres_conLoader {
 		instructor2.addDegree( degree1_2 );
 		
 		instructorDao.addInstructor( instructor2 );
+		
+		instructorDao.addInstructorDegrees( instructor2 );
+		
 		System.out.println( "A�adido instructor2: " + instructorDao.getInstructor( nif2 ).toString() );
 		
 		
@@ -221,6 +227,7 @@ public class TestJdbcPostgres_conLoader {
 		activityDao.addSpecializedInstructors( activity1 );
 		activityDao.addSpecializedInstructors( activity2 );
 		
+		
 		//customer, booking
 		
 		/***** CUSTOMER *****/
@@ -228,6 +235,8 @@ public class TestJdbcPostgres_conLoader {
 		System.out.println( "********* CUSTOMER *********" );
 		
 		/* ADD Y GET */
+		
+		
 		
 		CustomerDao cusDao = new CustomerDao();
 		
@@ -259,7 +268,10 @@ public class TestJdbcPostgres_conLoader {
 		cusDao.addCustomer(customer2);
 		System.out.println("Añadido customer2: " + cusDao.getCustomer(nif2).toString());
 		
+		
+		
 		/* UPDATE Y GET ALL */
+		
 	}
  
 }
