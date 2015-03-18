@@ -17,7 +17,7 @@ public class BorrarTablas {
 		try {
 			System.out.println("Borrando las tablas...");
 			Statement stmt = conn.createStatement();
-			List<String> listaTablas = getTablas();
+			List<String> listaTablas = getBorradoTablas();
 			
 			for(String tabla: listaTablas) {
 				stmt.execute(tabla);
@@ -35,7 +35,7 @@ public class BorrarTablas {
 		}
 	}
 	
-	public static List<String> getTablas(){
+	public static List<String> getBorradoTablas(){
 		
 		String bookingAssigns = "DROP TABLE bookig_assigns";
 		String activityLevel = "DROP TYPE activityLevel";
