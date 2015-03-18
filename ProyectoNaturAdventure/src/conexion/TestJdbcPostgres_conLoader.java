@@ -6,6 +6,7 @@
 package conexion;
 
 import java.io.InputStream;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,17 +16,22 @@ import java.io.IOException;
 
 import dao.Activity;
 import dao.ActivityDao;
+import dao.Booking;
+import dao.BookingDao;
+import dao.BookingStatus;
 import dao.Customer;
 import dao.CustomerDao;
 import dao.Degree;
 import dao.Instructor;
 import dao.InstructorDao;
 import dao.Level;
+import dao.StartHour;
  
 public class TestJdbcPostgres_conLoader {
 
 	final static String JDBC_PROPERTIES = "./jdbc.properties";
 
+	@SuppressWarnings("deprecation")
 	public static void main(String[] argv) {
 		System.out.println("-------- PostgreSQL "
 				+ "JDBC Connection Testing ------------");
@@ -228,16 +234,10 @@ public class TestJdbcPostgres_conLoader {
 		activityDao.addSpecializedInstructors( activity2 );
 		
 		
-		//customer, booking
-		
 		/***** CUSTOMER *****/
-		
 		System.out.println( "********* CUSTOMER *********" );
 		
 		/* ADD Y GET */
-		
-		
-		
 		CustomerDao cusDao = new CustomerDao();
 		
 		System.out.println( "-----------------------------" );
@@ -268,10 +268,83 @@ public class TestJdbcPostgres_conLoader {
 		cusDao.addCustomer(customer2);
 		System.out.println("Añadido customer2: " + cusDao.getCustomer(nif2).toString());
 		
+		/* UPDATE Y GET ALL */
 		
+		System.out.println( "-----------------------------" );
+		System.out.println( "UPDATE Y GET ALL" );
+		System.out.println( "-----------------------------" );
+		
+		customer1.setName("Accel");
+		customer1.setEmail("accelsincro@gmail.com");
+		
+		customer2.setSecondSurname("Andres");
+		customer2.setTelephone(666666123);
+		
+		cusDao.updateCustomer(customer1);
+		cusDao.updateCustomer(customer2);
+		
+		Set<Customer> customerSet = cusDao.getCustomers();
+		System.out.println( "Imprimiendo lista de clientes actualizada:" );
+		for( Customer customer: customerSet ) {
+			System.out.println( customer.toString() );
+		}
+		
+		/***** BOOKING *****/
+		System.out.println( "********* BOOKING *********" );
+		
+		/* ADD Y GET */
+		BookingDao bookingDao = new BookingDao();
+		
+		System.out.println( "-----------------------------" );
+		System.out.println( "ADD Y GET" );
+		System.out.println( "-----------------------------" );
+		
+		Booking booking1 = new Booking();
+		booking1.setCodBooking(1);
+		booking1.setCodActivity(1);
+		booking1.setBookingDate(new Date(2015, 05, 15));
+		booking1.setCustomerNif("x123456789");
+		booking1.setNumPartakers(4);
+		booking1.setProposalPerformingDate(new Date(2015, 05, 25));
+		booking1.setStartHour(StartHour.morning);
+		booking1.setStatus(BookingStatus.pending);
+		
+		bookingDao.addBooking(booking1);
+		System.out.println("Añadido booking1: " + bookingDao.getBooking(1));
+		
+		Booking booking2 = new Booking();
+		booking1.setCodBooking(2);
+		booking1.setCodActivity(2);
+		booking1.setBookingDate(new Date(2014, 02, 10));
+		booking1.setCustomerNif("y987654321");
+		booking1.setNumPartakers(2);
+		booking1.setProposalPerformingDate(new Date(2015, 01, 01));
+		booking1.setStartHour(StartHour.afternoon);
+		booking1.setStatus(BookingStatus.pending);
+		
+		bookingDao.addBooking(booking2);
+		System.out.println("Añadido booking2: " + bookingDao.getBooking(2));
 		
 		/* UPDATE Y GET ALL */
 		
+		System.out.println( "-----------------------------" );
+		System.out.println( "UPDATE Y GET ALL" );
+		System.out.println( "-----------------------------" );
+		
+		booking1.setNumPartakers(10);
+		booking1.setProposalPerformingDate(new Date(2015, 06, 8));
+		
+		booking2.setStatus(BookingStatus.denied);
+		booking2.setStartHour(StartHour.night);
+		
+		bookingDao.updateBooking(booking1);
+		bookingDao.updateBooking(booking2);
+		
+		Set<Booking> bookingSet = bookingDao.getBookings();
+		System.out.println( "Imprimiendo lista de reservas actualizada:" );
+		for( Booking booking: bookingSet ) {
+			System.out.println( booking.toString() );
+		}
 	}
  
 }

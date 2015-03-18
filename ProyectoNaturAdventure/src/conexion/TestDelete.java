@@ -9,6 +9,10 @@ import java.util.Properties;
 
 import dao.Activity;
 import dao.ActivityDao;
+import dao.Booking;
+import dao.BookingDao;
+import dao.Customer;
+import dao.CustomerDao;
 import dao.Instructor;
 import dao.InstructorDao;
 
@@ -90,8 +94,29 @@ public class TestDelete {
 			System.out.println( "Borrado instructor " + i );
 		}
 		
+		/***** CUSTOMER *****/
 		
+		CustomerDao customerDao = new CustomerDao();
+		String[] customerNifs = {"x123456789", "x987654321"};
+		Customer customer = null;
 		
+		for( int i = 1; i <= 2; i++) {
+			customer = new Customer();
+			customer.setNIF(customerNifs[i-1]);
+			customerDao.deleteCustomer(customer);
+			System.out.println("Borrado cliente " + i);
+		}
+		
+		/***** BOOKING *****/
+		
+		BookingDao bookingDao = new BookingDao();
+		Booking booking = null;
+		
+		for( int i = 1; i <= 2; i++) {
+			booking = new Booking();
+			booking.setCodBooking(i);
+			bookingDao.deleteBooking(booking);
+			System.out.println("Borrado reserva " + i);
+		}
 	}
-
 }
