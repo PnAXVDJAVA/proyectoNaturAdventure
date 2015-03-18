@@ -3,7 +3,7 @@ package disenyoFisico;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import conexion.ConnectionManager;
@@ -48,7 +48,7 @@ public class BorrarTablas {
 		String customer = "DROP TABLE customer";
 		String activity = "DROP TABLE activity";
 		
-		List<String> lista = new LinkedList<String>();
+		List<String> lista = new ArrayList<String>(10);
 		lista.add(instructorDegrees);
 		lista.add(bookingAssigns);
 		lista.add(startHour);
