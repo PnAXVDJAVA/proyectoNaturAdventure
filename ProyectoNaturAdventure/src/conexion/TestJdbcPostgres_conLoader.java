@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.io.IOException;
-
 import dao.Activity;
 import dao.ActivityDao;
 import dao.Booking;
