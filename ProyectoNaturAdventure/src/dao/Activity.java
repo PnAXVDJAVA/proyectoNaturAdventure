@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Activity {
 	
 	private int codActivity;
@@ -10,6 +13,7 @@ public class Activity {
 	private int maxPartakers;
 	private int minPartakers;
 	private Level level;
+	private List<Instructor> specializedInstructors; //////////////////////////////
 	
 	public Activity() {
 		this.codActivity = -1;
@@ -20,6 +24,7 @@ public class Activity {
 		this.maxPartakers = -1;
 		this.minPartakers = -1;
 		this.level = null;
+		this.specializedInstructors = null;
 	}
 	
 	public int getCodActivity() {
@@ -84,6 +89,21 @@ public class Activity {
 
 	public void setLevel(Level level) {
 		this.level = level;
+	}
+	
+	public void setSpecializedInstructors(  List<Instructor> list ) {
+		this.specializedInstructors = list;
+	}
+	
+	public List<Instructor> getSpecializedInstructors() {
+		return this.specializedInstructors;
+	}
+	
+	public void addSpecializedInstructor(  Instructor instructor ) {
+		if( specializedInstructors == null ) {
+			this.specializedInstructors = new LinkedList<>();
+		}
+		specializedInstructors.add( instructor );
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -69,6 +70,7 @@ public class ActivityDao {
 			stmt = connection.prepareStatement(sentenciaBuscaActivity);
 			stmt.setInt(1, codActivity);
 			rs = stmt.executeQuery();
+			rs.next(); ////////////////////////////////////////////////////////////////////////////////////
 			activity = storeActivities(rs);
 		} catch (SQLException e) {
 			Log.severe("Error ejecutando preparedStatement");
@@ -101,6 +103,7 @@ public class ActivityDao {
 			stmt.setInt(7, activity.getMinPartakers());
 			stmt.setString(8, activity.getLevel().toString());
 			stmt.execute();
+			
 		} catch (SQLException e) {
 			Log.severe("Error ejecutando preparedStatement");
 			e.printStackTrace();
@@ -147,6 +150,7 @@ public class ActivityDao {
 		PreparedStatement stmt = null;
 		
 		try {
+			
 			String sentenciaBorrar = "delete from Activity where codActivity = ?";
 			stmt = connection.prepareStatement(sentenciaBorrar);
 			stmt.setInt(1, activity.getCodActivity());
@@ -158,5 +162,35 @@ public class ActivityDao {
 		} finally {
 			c.closeConnections(stmt);
 		}
+	}
+	
+	public void addSpecializedInstructors( Activity activity ) { //////////////////////////////////////////////////////7
+		
+		ConnectionDatabase c = new ConnectionDatabase(Log);
+		Connection connection = c.getConnection();
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = connection.prepareStatement(
+					   "insert into Specialized(codActivity, instructorNif) "
+					   + " values(?, ?)");
+			
+			List<Instructor> specializedInstructors = activity.getSpecializedInstructors();
+			
+			for( Instructor instructor: specializedInstructors ) {
+				stmt.setInt(1, activity.getCodActivity());
+				stmt.setString(2, instructor.getNif());
+				stmt.execute();
+			}
+			
+			
+		} catch (SQLException e) {
+			Log.severe("Error ejecutando preparedStatement");
+			e.printStackTrace();
+			return;
+		} finally {
+			c.closeConnections(stmt);
+		}
+		
 	}
 }

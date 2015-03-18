@@ -46,7 +46,7 @@ public class Degree {
 	}
 
 	@Override
-	public String toString() {
-		return "Cod: " + codDegree + "\nDescription: " + description;
+	public String toString() {/////////////////////////////////////////////////////////////////////////////////////
+		return "Cod: " + codDegree + "; Name: " + name + "; Description: " + description;
 	}
 }

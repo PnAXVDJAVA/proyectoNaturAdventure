@@ -23,7 +23,7 @@ public class DegreeDao {
 		List<Degree> degreeList;
 		try {
 			stmt = connection.prepareStatement("SELECT * FROM Instructor_Degrees " 
-												+ "WHERE nif = ?;");
+												+ "WHERE instructorNif = ?;"); ///////////////////////////////////////////
 			stmt.setString(1, nif);
 			rs = stmt.executeQuery();
 			degreeList = new LinkedList<>();

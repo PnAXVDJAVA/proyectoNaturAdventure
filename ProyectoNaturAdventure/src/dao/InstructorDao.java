@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -81,7 +82,7 @@ public class InstructorDao {
 		return instructor;
 	}
 	
-	public void addInstructor(Instructor instructor) {
+	public void addInstructor(Instructor instructor) { /////////////////////////////////////////////////////////////////
 		ConnectionDatabase c = new ConnectionDatabase(Log);
 		Connection connection = c.getConnection();
 		PreparedStatement stmt = null;
@@ -102,13 +103,48 @@ public class InstructorDao {
 			stmt.setString(9, instructor.getBankAccount());
 			stmt.setString(10, instructor.getUserID());
 			stmt.setString(11, instructor.getPassword());
+			
 			stmt.execute();
+			
+			addInstructorDegrees( instructor );
+			
 		} catch (SQLException e) {
 			Log.severe("Error ejecutando preparedStatement");
 			e.printStackTrace();
 		} finally {
 			c.closeConnections(stmt);
 		}
+	}
+	
+	public void addInstructorDegrees( Instructor instructor ) { ///////////////////////////////////////////////////////////
+		
+		ConnectionDatabase c = new ConnectionDatabase(Log);
+		Connection connection = c.getConnection();
+		PreparedStatement stmt = null;
+		try {
+			
+			List<Degree> degreesList = instructor.getDegrees();
+			
+			for( Degree degree: degreesList ) {
+				stmt = connection.prepareStatement(
+						"INSERT INTO Instructor_Degrees(instructorNif, codDegree, description, name)" + 
+						" VALUES(?, ?, ?, ?);");
+				
+				stmt.setString(1, instructor.getNif());
+				stmt.setInt(2, degree.getCodDegree());
+				stmt.setString(3, degree.getDescription());
+				stmt.setString(4, degree.getName());
+				
+				stmt.execute();
+			}
+			
+		} catch (SQLException e) {
+			Log.severe("Error ejecutando preparedStatement");
+			e.printStackTrace();
+		} finally {
+			c.closeConnections(stmt);
+		}
+		
 	}
 	
 	public void updateInstructor(Instructor instructor) {

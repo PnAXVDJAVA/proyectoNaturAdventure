@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Instructor {
@@ -125,15 +126,28 @@ public class Instructor {
 	}
 
 	public void setDegrees(List<Degree> degrees) {
+		
+		for( Degree degree: degrees ) {
+			degree.setInstructorNif( this.nif );
+		}
+		
 		this.degrees = degrees;
 	}
 	
-	public String toString() {
+	public void addDegree( Degree degree ) { ////////////////////////////////////////////////////////
+		if( degrees == null ) {
+			this.degrees = new LinkedList<>();
+		}
+		degree.setInstructorNif( this.nif );
+		this.degrees.add( degree );
+	}
+	
+	public String toString() { ////////////////////////////////////////////////////////////////////////
 		StringBuilder sb = new StringBuilder();
 		sb.append("Name: " + name + " || Surname: " + firstSurname + " " + secondSurname + " || Adress: " + address 
 				+ "\nTelephone: " + telephone + " || Email: " + email + " || DateOfBirth: " + dateOfBirth 
 				+ "\nBancAccount: " + bankAccount + " || UserID: " + userID
-				+ "\nDegrees: ");
+				+ "\nDegrees:\n ");
 		for (Degree d: degrees)
 			sb.append("\t"+d.toString()+"\n");
 		return sb.toString();
