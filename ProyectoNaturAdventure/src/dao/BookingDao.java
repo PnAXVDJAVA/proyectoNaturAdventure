@@ -134,9 +134,11 @@ public class BookingDao {
 		ConnectionDatabase c = new ConnectionDatabase(Log);
 		Connection connection = c.getConnection();
 		PreparedStatement stmt = null;
+		int codBooking = booking.getCodBooking();
+		deleteAssingInstructors(codBooking, connection);
 		try {
 			stmt = connection.prepareStatement("DELETE FROM Booking WHERE codBooking = ?;");
-			stmt.setInt(1, booking.getCodBooking());
+			stmt.setInt(1, codBooking);
 			stmt.execute();
 		}  catch (SQLException e) {
 			Log.severe("Error ejecutando preparedStatement");
@@ -144,6 +146,19 @@ public class BookingDao {
 			return;
 		} finally {
 			c.closeConnections(stmt);
+		}
+	}
+	
+	private void deleteAssingInstructors(int codBooking, Connection connection) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = connection.prepareStatement("DELETE FROM booking_assigns WHERE codBooking = ?;");
+			stmt.setInt(1, codBooking);
+			stmt.execute();
+		}  catch (SQLException e) {
+			Log.severe("Error ejecutando preparedStatement");
+			e.printStackTrace();
+			return;
 		}
 	}
 	

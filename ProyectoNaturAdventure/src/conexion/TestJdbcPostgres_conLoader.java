@@ -298,7 +298,7 @@ public class TestJdbcPostgres_conLoader {
 		BookingDao bookingDao = new BookingDao();
 		List<Instructor> listaInstructors = new LinkedList<Instructor>();
 		listaInstructors.add(instructor1);
-		listaInstructors.add(instructor1);
+		listaInstructors.add(instructor2);
 		
 		System.out.println( "-----------------------------" );
 		System.out.println( "ADD Y GET" );
@@ -315,8 +315,8 @@ public class TestJdbcPostgres_conLoader {
 		booking1.setStatus(BookingStatus.pending);
 		booking1.setAssignedInstructors(listaInstructors);
 		
-		
 		bookingDao.addBooking(booking1);
+		bookingDao.assignInstructors(booking1);
 		System.out.println("Añadido booking1: " + bookingDao.getBooking(1));
 		
 		Booking booking2 = new Booking();
@@ -331,6 +331,7 @@ public class TestJdbcPostgres_conLoader {
 		booking2.setAssignedInstructors(listaInstructors);
 		
 		bookingDao.addBooking(booking2);
+		bookingDao.assignInstructors(booking2);
 		System.out.println("Añadido booking2: " + bookingDao.getBooking(2));
 		
 		/* UPDATE Y GET ALL */
