@@ -6,12 +6,9 @@
 package conexion;
 
 import java.io.InputStream;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.io.IOException;
@@ -95,7 +92,7 @@ public class TestJdbcPostgres_conLoader {
 		activity1.setPricePerPerson( 50.5 );
 		
 		activityDao.addActivity( activity1 );
-		System.out.println( "Añadida activity 1: " + activityDao.getActivity( activity1.getCodActivity() ).toString() );
+		System.out.println( "Aï¿½adida activity 1: " + activityDao.getActivity( activity1.getCodActivity() ).toString() );
 		
 		Activity activity2 = new Activity();
 		activity2.setCodActivity( 2 );
@@ -108,7 +105,7 @@ public class TestJdbcPostgres_conLoader {
 		activity2.setPricePerPerson( 60.5 );
 		
 		activityDao.addActivity( activity2 );
-		System.out.println( "Añadida activity 2: " + activityDao.getActivity( activity2.getCodActivity() ).toString() );
+		System.out.println( "Aï¿½adida activity 2: " + activityDao.getActivity( activity2.getCodActivity() ).toString() );
 		
 		/* UPDATE Y GET ALL */
 		
@@ -146,9 +143,9 @@ public class TestJdbcPostgres_conLoader {
 		String nif1 = "20488603L";
 		instructor1.setNif( nif1 );
 		instructor1.setName( "David" );
-		instructor1.setFirstSurname( "López" );
+		instructor1.setFirstSurname( "Lï¿½pez" );
 		instructor1.setSecondSurname( "Castellote" );
-		instructor1.setAddress( "C/ Picasso, 2, 2º, 6ª" );
+		instructor1.setAddress( "C/ Picasso, 2, 2ï¿½, 6ï¿½" );
 		instructor1.setEmail( "al259345@uji.es" );
 		instructor1.setDateOfBirth( java.sql.Date.valueOf( "1994-08-30" ) );
 		instructor1.setTelephone( 669597047 );
@@ -166,7 +163,7 @@ public class TestJdbcPostgres_conLoader {
 		instructor1.addDegree( degree1_2 );
 		
 		instructorDao.addInstructor( instructor1 );
-		System.out.println( "Añadido instructor1: " + instructorDao.getInstructor( nif1 ).toString() );
+		System.out.println( "Aï¿½adido instructor1: " + instructorDao.getInstructor( nif1 ).toString() );
 		
 		Instructor instructor2 = new Instructor();
 		String nif2 = "111111111";
@@ -187,7 +184,7 @@ public class TestJdbcPostgres_conLoader {
 		instructor2.addDegree( degree1_2 );
 		
 		instructorDao.addInstructor( instructor2 );
-		System.out.println( "Añadido instructor2: " + instructorDao.getInstructor( nif2 ).toString() );
+		System.out.println( "Aï¿½adido instructor2: " + instructorDao.getInstructor( nif2 ).toString() );
 		
 		
 		/* UPDATE Y GET ALL */
@@ -222,6 +219,7 @@ public class TestJdbcPostgres_conLoader {
 		activityDao.addSpecializedInstructors( activity1 );
 		activityDao.addSpecializedInstructors( activity2 );
 		
+		//customer, booking, booking_assigns
 	}
  
 }

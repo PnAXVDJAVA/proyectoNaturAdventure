@@ -11,7 +11,6 @@ import dao.Activity;
 import dao.ActivityDao;
 import dao.Instructor;
 import dao.InstructorDao;
-import dao.Level;
 
 public class TestDelete {
 	
