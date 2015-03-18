@@ -15,6 +15,8 @@ import java.io.IOException;
 
 import dao.Activity;
 import dao.ActivityDao;
+import dao.Customer;
+import dao.CustomerDao;
 import dao.Degree;
 import dao.Instructor;
 import dao.InstructorDao;
@@ -219,7 +221,45 @@ public class TestJdbcPostgres_conLoader {
 		activityDao.addSpecializedInstructors( activity1 );
 		activityDao.addSpecializedInstructors( activity2 );
 		
-		//customer, booking, booking_assigns
+		//customer, booking
+		
+		/***** CUSTOMER *****/
+		
+		System.out.println( "********* CUSTOMER *********" );
+		
+		/* ADD Y GET */
+		
+		CustomerDao cusDao = new CustomerDao();
+		
+		System.out.println( "-----------------------------" );
+		System.out.println( "ADD Y GET" );
+		System.out.println( "-----------------------------" );
+		
+		Customer customer1 = new Customer();
+		nif1 = "x123456789";
+		customer1.setNIF(nif1);
+		customer1.setName("Valeriu");
+		customer1.setFirstSurname("Gavriluta");
+		customer1.setSecondSurname(" ");
+		customer1.setEmail("al259410@uji.es");
+		customer1.setTelephone(666457895);
+		
+		cusDao.addCustomer(customer1);
+		System.out.println("Añadido customer1: " + cusDao.getCustomer(nif1).toString());
+		
+		Customer customer2 = new Customer();
+		nif2 = "x987654321";
+		customer1.setNIF(nif1);
+		customer1.setName("Jorge");
+		customer1.setFirstSurname("Vicente");
+		customer1.setSecondSurname("Cantero");
+		customer1.setEmail("al259547@uji.es");
+		customer1.setTelephone(669457565);
+		
+		cusDao.addCustomer(customer2);
+		System.out.println("Añadido customer2: " + cusDao.getCustomer(nif2).toString());
+		
+		/* UPDATE Y GET ALL */
 	}
  
 }
