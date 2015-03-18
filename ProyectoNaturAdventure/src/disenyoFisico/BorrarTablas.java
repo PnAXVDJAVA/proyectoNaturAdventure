@@ -37,7 +37,7 @@ public class BorrarTablas {
 	
 	public static List<String> getBorradoTablas(){
 		
-		String bookingAssigns = "DROP TABLE bookig_assigns";
+		String bookingAssigns = "DROP TABLE booking_assigns";
 		String activityLevel = "DROP TYPE activityLevel";
 		String booking = "DROP TABLE booking";
 		String startHour = "DROP TYPE startHour";
@@ -51,14 +51,14 @@ public class BorrarTablas {
 		List<String> lista = new ArrayList<String>(10);
 		lista.add(instructorDegrees);
 		lista.add(bookingAssigns);
-		lista.add(startHour);
-		lista.add(bookingStatus);
 		lista.add(booking);
 		lista.add(customer);
 		lista.add(specialized);
 		lista.add(instructor);
-		lista.add(activityLevel);
 		lista.add(activity);
+		lista.add(startHour);
+		lista.add(bookingStatus);
+		lista.add(activityLevel);
 
 		return lista;
 	}

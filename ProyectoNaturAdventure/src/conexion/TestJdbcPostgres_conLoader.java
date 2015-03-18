@@ -306,10 +306,10 @@ public class TestJdbcPostgres_conLoader {
 		Booking booking1 = new Booking();
 		booking1.setCodBooking(1);
 		booking1.setCodActivity(1);
-		booking1.setBookingDate(new Date(2015, 05, 15));
+		booking1.setBookingDate(java.sql.Date.valueOf( "2015-05-15" ));
 		booking1.setCustomerNif("x123456789");
 		booking1.setNumPartakers(4);
-		booking1.setProposalPerformingDate(new Date(2015, 05, 25));
+		booking1.setProposalPerformingDate(java.sql.Date.valueOf( "2015-05-25" ));
 		booking1.setStartHour(StartHour.morning);
 		booking1.setStatus(BookingStatus.pending);
 		booking1.setAssignedInstructors(listaInstructors);
@@ -321,10 +321,10 @@ public class TestJdbcPostgres_conLoader {
 		Booking booking2 = new Booking();
 		booking2.setCodBooking(2);
 		booking2.setCodActivity(2);
-		booking2.setBookingDate(new Date(2014, 02, 10));
+		booking2.setBookingDate(java.sql.Date.valueOf( "2014-02-10" ));
 		booking2.setCustomerNif("x987654321");
 		booking2.setNumPartakers(2);
-		booking2.setProposalPerformingDate(new Date(2015, 01, 01));
+		booking2.setProposalPerformingDate(java.sql.Date.valueOf( "2015-01-01" ));
 		booking2.setStartHour(StartHour.afternoon);
 		booking2.setStatus(BookingStatus.pending);
 		booking2.setAssignedInstructors(listaInstructors);
