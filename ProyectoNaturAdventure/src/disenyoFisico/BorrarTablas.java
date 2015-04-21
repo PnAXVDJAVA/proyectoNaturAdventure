@@ -43,6 +43,7 @@ public class BorrarTablas {
 		String startHour = "DROP TYPE startHour";
 		String bookingStatus = "DROP TYPE bookingStatus";
 		String instructorDegrees = "DROP TABLE instructor_degrees";
+		String degree = "DROP TABLE degree";
 		String instructor = "DROP TABLE instructor";
 		String specialized = "DROP TABLE specialized";
 		String customer = "DROP TABLE customer";
@@ -50,6 +51,7 @@ public class BorrarTablas {
 		
 		List<String> lista = new ArrayList<String>(10);
 		lista.add(instructorDegrees);
+		lista.add(degree);
 		lista.add(bookingAssigns);
 		lista.add(booking);
 		lista.add(customer);
