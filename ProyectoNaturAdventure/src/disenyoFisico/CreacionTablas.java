@@ -8,6 +8,8 @@ import java.util.List;
 import conexion.ConnectionManager;
 
 public class CreacionTablas {
+	
+	private static final String ficheroAdmins = "admins.txt";
 
 
 	public static void main(String[] argv) throws Exception {
@@ -26,6 +28,13 @@ public class CreacionTablas {
     			System.out.println("Tabla creada (" + i + ")");
     			i++;
     		}
+    		i = 0;
+    		
+    		List<String> listaAdminsInserts = Admins.getAdminsInserts();
+    		for( String adminInsert: listaAdminsInserts ) {
+    			stmt.executeUpdate( adminInsert );
+    			System.out.println( "Admin insertado (" + i + ")" );
+    		}
 
  		} catch (SQLException e) {
 			System.out.println("No se ha podido crear la tabla " + i );
@@ -36,5 +45,6 @@ public class CreacionTablas {
 				conn.close();
 		}
 	}
+	
 
 }

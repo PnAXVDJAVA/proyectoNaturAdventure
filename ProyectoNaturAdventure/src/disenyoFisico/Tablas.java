@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Tablas {
 	
-	private static String [] listaFicherosSQL = { "activityTable.sql", "instructorTable.sql", "specializedTable.sql", 
+	private static String [] listaFicherosSQL = { "activityTable.sql", "userDetailsTable.sql", "instructorTable.sql", "specializedTable.sql", 
 												  "customerTable.sql", "bookingTable.sql", "bookingAssignsTable.sql", 
 												  "degreeTable.sql", "instructorDegreesTable.sql" };
 	

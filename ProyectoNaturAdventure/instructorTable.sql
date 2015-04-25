@@ -11,8 +11,10 @@ CREATE TABLE INSTRUCTOR (
 	email VARCHAR( 50 ) NOT NULL,
 	bankAccount VARCHAR( 300 ) NOT NULL,
 	userID VARCHAR( 20 ) NOT NULL,
-	password VARCHAR( 100 ) NOT NULL,
 
-	CONSTRAINT cp_instructor PRIMARY KEY( nif )
+	CONSTRAINT cp_instructor PRIMARY KEY( nif ),
+	CONSTRAINT ca_instructor_user_details FOREIGN KEY( userID )
+											REFERENCES user_details( userID )
+											ON UPDATE CASCADE ON DELETE CASCADE					
 
 );

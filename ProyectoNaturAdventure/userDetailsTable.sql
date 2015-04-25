@@ -1,0 +1,10 @@
+
+CREATE TABLE USER_DETAILS (
+
+	userID VARCHAR( 20 ) NOT NULL,
+	password VARCHAR( 200 ) NOT NULL,
+	role INTEGER NOT NULL,
+
+	CONSTRAINT cp_user_details PRIMARY KEY( userID )
+
+);
