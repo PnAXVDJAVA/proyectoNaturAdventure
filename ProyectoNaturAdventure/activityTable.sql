@@ -11,6 +11,7 @@ CREATE TABLE ACTIVITY (
 	duration INTEGER NOT NULL,
 	maxPartakers INTEGER,
 	minPartakers INTEGER NOT NULL,
+	picture BYTEA NOT NULL,
 
 	CONSTRAINT cp_activity PRIMARY KEY ( codActivity ),
 	CONSTRAINT calt_activity UNIQUE ( name ),

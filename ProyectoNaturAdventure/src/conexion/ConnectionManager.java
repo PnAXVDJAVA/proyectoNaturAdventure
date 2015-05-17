@@ -16,10 +16,12 @@ import java.util.Properties;
 public class ConnectionManager {
 	private final static Logger Log = Logger.getLogger(ConnectionManager.class.getName()); 
 	
- 	static String url = "jdbc:postgresql://db-aules.uji.es/ei102714ggl";
+	//static String url = "jdbc:postgresql://db-aules.uji.es/ei102714ggl";
+ 	static String url = "jdbc:postgresql://localhost/pnawLocal";
 	static String driverName= "org.postgresql.Driver";
 	static Connection connection=null;
-	final static String JDBC_PROPERTIES = "./jdbc.properties";
+	//final static String JDBC_PROPERTIES = "./jdbc.properties";
+	final static String JDBC_PROPERTIES = "./jdbc.properties2";
 	
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		if (connection != null && !connection.isClosed())

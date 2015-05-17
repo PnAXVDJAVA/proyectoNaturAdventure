@@ -1,0 +1,4 @@
+user = postgres
+password = 1blqu6ma
+ssl = true
+sslfactory = org.postgresql.ssl.NonValidatingFactory
