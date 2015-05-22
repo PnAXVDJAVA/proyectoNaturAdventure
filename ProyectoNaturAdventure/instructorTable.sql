@@ -6,7 +6,7 @@ CREATE TABLE INSTRUCTOR (
 	firstSurname VARCHAR( 20 ) NOT NULL,
 	secondSurname VARCHAR( 20 ),
 	address VARCHAR( 50 ) NOT NULL,
-	telephone INTEGER NOT NULL,
+	telephone VARCHAR( 19 ) NOT NULL,
 	dateOfBirth DATE NOT NULL,
 	email VARCHAR( 50 ) NOT NULL,
 	bankAccount VARCHAR( 300 ) NOT NULL,

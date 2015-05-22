@@ -5,7 +5,7 @@ CREATE TABLE CUSTOMER (
 	firstSurname VARCHAR( 20 ) NOT NULL,
 	secondSurname VARCHAR( 20 ),
 	email VARCHAR( 50 ) NOT NULL,
-	telephone INTEGER NOT NULL,
+	telephone VARCHAR( 19 ) NOT NULL,
 	userID VARCHAR( 20 ) NOT NULL,
 
 	CONSTRAINT cp_customer PRIMARY KEY ( nif ),
