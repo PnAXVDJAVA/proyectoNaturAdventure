@@ -11,7 +11,7 @@ public class Tablas {
 	
 	private static String [] listaFicherosSQL = { "activityTable.sql", "userDetailsTable.sql", "instructorTable.sql", "specializedTable.sql", 
 												  "customerTable.sql", "bookingTable.sql", "bookingAssignsTable.sql", 
-												  "degreeTable.sql", "instructorDegreesTable.sql" };
+												  "degreeTable.sql", "instructorDegreesTable.sql", "suggestionTable.sql" };
 	
 	public static String leeFicheroTabla( String fichero ) {
 		BufferedReader br;
